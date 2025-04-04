@@ -39,8 +39,8 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
 
     void Update()
     {
-   //     if (photonView.IsMine)
-   //     {
+        if (photonView.IsMine)
+        {
             horizontal = Input.GetAxisRaw("Horizontal");
             vertical = Input.GetAxisRaw("Vertical");
 
@@ -57,20 +57,20 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
             {
                 ONInteract();
             }
-  //      }
+        }
     }
 
     void FixedUpdate()
     {
- //       if (photonView.IsMine)
-  //      {
+       if (photonView.IsMine)
+        {
             if (isEvading)
             {
                 return;
             }
             
             Move();
-  //      }
+        }
     }
 
     void Move()
