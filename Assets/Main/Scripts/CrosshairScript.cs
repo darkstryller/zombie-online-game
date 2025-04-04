@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
-public class CrosshairScript : MonoBehaviour
+public class CrosshairScript : MonoBehaviourPunCallbacks
 {
     void Start()
     {
@@ -11,7 +12,10 @@ public class CrosshairScript : MonoBehaviour
     
     void Update()
     {
-        Vector2 MouseCursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = MouseCursorPos;
+        if(photonView.IsMine)
+        {
+            Vector2 MouseCursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            transform.position = MouseCursorPos;
+        }
     }
 }

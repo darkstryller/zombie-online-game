@@ -40,8 +40,8 @@ public class Gun : MonoBehaviourPunCallbacks, IGun
 
     void Update()
     {
-     //   if (photonView.IsMine)
-     //   {
+        if (photonView.IsMine)
+        {
             mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             startPos = shootPoint.position;
 
@@ -68,7 +68,7 @@ public class Gun : MonoBehaviourPunCallbacks, IGun
 
             ammoCount.text = currentAmmo.ToString();
             maxAmmoCount.text = maxAmmo.ToString();
-    //    }
+        }
     }
     #endregion
 
