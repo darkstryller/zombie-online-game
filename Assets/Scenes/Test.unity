@@ -912,10 +912,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-  gunHolder: {fileID: 0}
->>>>>>> Stashed changes
 =======
   gunHolder: {fileID: 0}
 >>>>>>> Stashed changes
@@ -1004,10 +1000,7 @@ RectTransform:
   m_SizeDelta: {x: 250, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 =======
-=======
->>>>>>> Stashed changes
 --- !u!1 &285102319
 GameObject:
   m_ObjectHideFlags: 0
@@ -1142,9 +1135,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 285102319}
   m_CullTransparentMesh: 1
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
 --- !u!1 &286552037
 GameObject:
@@ -1434,10 +1424,7 @@ Transform:
   m_Father: {fileID: 487038693}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 =======
-=======
->>>>>>> Stashed changes
 --- !u!1 &433537787
 GameObject:
   m_ObjectHideFlags: 0
@@ -1586,9 +1573,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 433537787}
   m_CullTransparentMesh: 1
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
 --- !u!1 &481050936
 GameObject:
@@ -1731,11 +1715,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1781906639
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
   m_SortingLayer: 1
-=======
-  m_SortingLayer: 0
->>>>>>> Stashed changes
 =======
   m_SortingLayer: 0
 >>>>>>> Stashed changes
@@ -1749,11 +1729,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
   m_WasSpriteAssigned: 1
-=======
-  m_WasSpriteAssigned: 0
->>>>>>> Stashed changes
 =======
   m_WasSpriteAssigned: 0
 >>>>>>> Stashed changes
@@ -1791,7 +1767,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
   movSpeed: 5
   evadeForce: 10
   maxEvades: 2
@@ -1799,8 +1774,6 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
 =======
-=======
->>>>>>> Stashed changes
   pvCache: {fileID: 0}
   movSpeed: 5
   horizontal: 0
@@ -1815,9 +1788,6 @@ MonoBehaviour:
   mousePos: {x: 0, y: 0}
   rb: {fileID: 0}
   interactableLayer:
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
     m_Bits: 128
   interactPoint: {fileID: 396076605}
@@ -1950,10 +1920,7 @@ BoxCollider2D:
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 =======
-=======
->>>>>>> Stashed changes
 --- !u!1 &531451454
 GameObject:
   m_ObjectHideFlags: 0
@@ -2128,9 +2095,6 @@ Transform:
   - {fileID: 1810605098}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
 --- !u!1 &702431312
 GameObject:
@@ -2194,11 +2158,7 @@ Camera:
   field of view: 60
   orthographic: 1
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
   orthographic size: 5
-=======
-  orthographic size: 8
->>>>>>> Stashed changes
 =======
   orthographic size: 8
 >>>>>>> Stashed changes
@@ -2226,15 +2186,9 @@ Transform:
   m_GameObject: {fileID: 702431312}
   serializedVersion: 2
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-=======
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
-  m_LocalScale: {x: 1.6520312, y: 1.15, z: 1}
->>>>>>> Stashed changes
 =======
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
@@ -2329,11 +2283,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1781906639
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
   m_SortingLayer: 1
-=======
-  m_SortingLayer: 0
->>>>>>> Stashed changes
 =======
   m_SortingLayer: 0
 >>>>>>> Stashed changes
@@ -2347,11 +2297,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
   m_WasSpriteAssigned: 1
-=======
-  m_WasSpriteAssigned: 0
->>>>>>> Stashed changes
 =======
   m_WasSpriteAssigned: 0
 >>>>>>> Stashed changes
@@ -2416,10 +2362,7 @@ Transform:
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 =======
-=======
->>>>>>> Stashed changes
 --- !u!1 &721721071
 GameObject:
   m_ObjectHideFlags: 0
@@ -2568,9 +2511,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 721721071}
   m_CullTransparentMesh: 1
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
 --- !u!1 &747715961
 GameObject:
@@ -2683,10 +2623,7 @@ Transform:
   m_Father: {fileID: 1173411737}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 =======
-=======
->>>>>>> Stashed changes
 --- !u!1 &791349676
 GameObject:
   m_ObjectHideFlags: 0
@@ -2821,9 +2758,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 791349676}
   m_CullTransparentMesh: 1
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
 --- !u!1 &817535600
 GameObject:
@@ -2979,13 +2913,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-=======
-  m_LocalPosition: {x: 0.12, y: 4.24, z: 0}
-  m_LocalScale: {x: 10.3394, y: 1.0000639, z: 1}
->>>>>>> Stashed changes
 =======
   m_LocalPosition: {x: 0.12, y: 4.24, z: 0}
   m_LocalScale: {x: 10.3394, y: 1.0000639, z: 1}
@@ -3009,10 +2938,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   market: {fileID: 1319900102}
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-  IsShooping: 0
->>>>>>> Stashed changes
 =======
   IsShooping: 0
 >>>>>>> Stashed changes
@@ -3182,10 +3107,7 @@ CanvasRenderer:
   m_GameObject: {fileID: 1002062487}
   m_CullTransparentMesh: 1
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 =======
-=======
->>>>>>> Stashed changes
 --- !u!1 &1048589482
 GameObject:
   m_ObjectHideFlags: 0
@@ -3333,9 +3255,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
 --- !u!1 &1145218079
 GameObject:
@@ -3369,10 +3288,7 @@ Transform:
   m_Father: {fileID: 705134183}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 =======
-=======
->>>>>>> Stashed changes
 --- !u!1 &1150032825
 GameObject:
   m_ObjectHideFlags: 0
@@ -3507,9 +3423,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1150032825}
   m_CullTransparentMesh: 1
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
 --- !u!1 &1159051700
 GameObject:
@@ -3565,10 +3478,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 3
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-  gunHolder: {fileID: 0}
->>>>>>> Stashed changes
 =======
   gunHolder: {fileID: 0}
 >>>>>>> Stashed changes
@@ -3847,10 +3756,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-  pvCache: {fileID: 0}
->>>>>>> Stashed changes
 =======
   pvCache: {fileID: 0}
 >>>>>>> Stashed changes
@@ -3859,10 +3764,7 @@ MonoBehaviour:
   ammoCount: {fileID: 219119876}
   maxAmmoCount: {fileID: 481050938}
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 =======
-=======
->>>>>>> Stashed changes
   mousePos: {x: 0, y: 0}
   startPos: {x: 0, y: 0}
   market: {fileID: 0}
@@ -3873,9 +3775,6 @@ MonoBehaviour:
   IsReloading: 0
   isShooting: 0
   nextFireTime: 0
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
 --- !u!212 &1173411739
 SpriteRenderer:
@@ -3917,11 +3816,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1518015849
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
   m_SortingLayer: 2
-=======
-  m_SortingLayer: 0
->>>>>>> Stashed changes
 =======
   m_SortingLayer: 0
 >>>>>>> Stashed changes
@@ -3935,13 +3830,10 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 =======
-=======
->>>>>>> Stashed changes
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
@@ -4079,9 +3971,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1226822216}
   m_CullTransparentMesh: 1
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
 --- !u!1 &1238109591
 GameObject:
@@ -4168,10 +4057,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-  gunHolder: {fileID: 0}
->>>>>>> Stashed changes
 =======
   gunHolder: {fileID: 0}
 >>>>>>> Stashed changes
@@ -4373,10 +4258,7 @@ Canvas:
   m_SortingOrder: 0
   m_TargetDisplay: 0
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 =======
-=======
->>>>>>> Stashed changes
 --- !u!1 &1362405388
 GameObject:
   m_ObjectHideFlags: 0
@@ -4647,9 +4529,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
 --- !u!1 &1426241945
 GameObject:
@@ -4811,10 +4690,7 @@ Transform:
   m_Father: {fileID: 705134183}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 =======
-=======
->>>>>>> Stashed changes
 --- !u!1 &1496762917
 GameObject:
   m_ObjectHideFlags: 0
@@ -4963,9 +4839,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 300}
   m_SizeDelta: {x: 250, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
 --- !u!1 &1506494098
 GameObject:
@@ -5014,10 +4887,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-  pvCache: {fileID: 0}
->>>>>>> Stashed changes
 =======
   pvCache: {fileID: 0}
 >>>>>>> Stashed changes
@@ -5026,10 +4895,7 @@ MonoBehaviour:
   ammoCount: {fileID: 219119876}
   maxAmmoCount: {fileID: 481050938}
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 =======
-=======
->>>>>>> Stashed changes
   mousePos: {x: 0, y: 0}
   startPos: {x: 0, y: 0}
   market: {fileID: 0}
@@ -5040,9 +4906,6 @@ MonoBehaviour:
   IsReloading: 0
   isShooting: 0
   nextFireTime: 0
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
 --- !u!212 &1506494101
 SpriteRenderer:
@@ -5084,11 +4947,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1518015849
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
   m_SortingLayer: 2
-=======
-  m_SortingLayer: 0
->>>>>>> Stashed changes
 =======
   m_SortingLayer: 0
 >>>>>>> Stashed changes
@@ -5102,13 +4961,10 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 =======
-=======
->>>>>>> Stashed changes
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
@@ -5379,9 +5235,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1518497916}
   m_CullTransparentMesh: 1
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
 --- !u!1 &1542375859
 GameObject:
@@ -5429,11 +5282,6 @@ GameObject:
   - component: {fileID: 1572419452}
   - component: {fileID: 1572419451}
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-  - component: {fileID: 1572419458}
-  - component: {fileID: 1572419457}
->>>>>>> Stashed changes
 =======
   - component: {fileID: 1572419458}
   - component: {fileID: 1572419457}
@@ -5458,10 +5306,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-  health: {fileID: 0}
->>>>>>> Stashed changes
 =======
   health: {fileID: 0}
 >>>>>>> Stashed changes
@@ -5479,10 +5323,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-  currentHealth: 0
->>>>>>> Stashed changes
 =======
   currentHealth: 0
 >>>>>>> Stashed changes
@@ -5599,11 +5439,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
   m_SortingOrder: 0
-=======
-  m_SortingOrder: 1
->>>>>>> Stashed changes
 =======
   m_SortingOrder: 1
 >>>>>>> Stashed changes
@@ -5616,11 +5452,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
   m_WasSpriteAssigned: 1
-=======
-  m_WasSpriteAssigned: 0
->>>>>>> Stashed changes
 =======
   m_WasSpriteAssigned: 0
 >>>>>>> Stashed changes
@@ -5643,10 +5475,7 @@ Transform:
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 =======
-=======
->>>>>>> Stashed changes
 --- !u!114 &1572419457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5683,9 +5512,6 @@ NavMeshAgent:
   m_BaseOffset: 0.59004223
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
 --- !u!1 &1712899861
 GameObject:
@@ -5719,10 +5545,7 @@ Transform:
   m_Father: {fileID: 705134183}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 =======
-=======
->>>>>>> Stashed changes
 --- !u!1 &1735347509
 GameObject:
   m_ObjectHideFlags: 0
@@ -5871,9 +5694,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1735347509}
   m_CullTransparentMesh: 1
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
 --- !u!1 &1736337342
 GameObject:
@@ -5922,10 +5742,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-  pvCache: {fileID: 0}
->>>>>>> Stashed changes
 =======
   pvCache: {fileID: 0}
 >>>>>>> Stashed changes
@@ -5934,10 +5750,7 @@ MonoBehaviour:
   ammoCount: {fileID: 219119876}
   maxAmmoCount: {fileID: 481050938}
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 =======
-=======
->>>>>>> Stashed changes
   mousePos: {x: 0, y: 0}
   startPos: {x: 0, y: 0}
   market: {fileID: 0}
@@ -5948,9 +5761,6 @@ MonoBehaviour:
   IsReloading: 0
   isShooting: 0
   nextFireTime: 0
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
 --- !u!212 &1736337345
 SpriteRenderer:
@@ -5992,11 +5802,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1518015849
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
   m_SortingLayer: 2
-=======
-  m_SortingLayer: 0
->>>>>>> Stashed changes
 =======
   m_SortingLayer: 0
 >>>>>>> Stashed changes
@@ -6010,11 +5816,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
   m_WasSpriteAssigned: 1
-=======
-  m_WasSpriteAssigned: 0
->>>>>>> Stashed changes
 =======
   m_WasSpriteAssigned: 0
 >>>>>>> Stashed changes
@@ -6105,10 +5907,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-  gunHolder: {fileID: 0}
->>>>>>> Stashed changes
 =======
   gunHolder: {fileID: 0}
 >>>>>>> Stashed changes
@@ -6207,10 +6005,7 @@ CanvasRenderer:
   m_GameObject: {fileID: 1796476607}
   m_CullTransparentMesh: 1
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 =======
-=======
->>>>>>> Stashed changes
 --- !u!1 &1810605094
 GameObject:
   m_ObjectHideFlags: 0
@@ -6314,9 +6109,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
 --- !u!1 &1877061248
 GameObject:
@@ -6424,10 +6216,7 @@ Canvas:
   m_SortingOrder: 0
   m_TargetDisplay: 0
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 =======
-=======
->>>>>>> Stashed changes
 --- !u!1 &1886498897
 GameObject:
   m_ObjectHideFlags: 0
@@ -6537,9 +6326,6 @@ Transform:
   - {fileID: 1416541102}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
 --- !u!1 &1888539305
 GameObject:
@@ -6628,10 +6414,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-  pvCache: {fileID: 0}
->>>>>>> Stashed changes
 =======
   pvCache: {fileID: 0}
 >>>>>>> Stashed changes
@@ -6640,10 +6422,7 @@ MonoBehaviour:
   ammoCount: {fileID: 219119876}
   maxAmmoCount: {fileID: 481050938}
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 =======
-=======
->>>>>>> Stashed changes
   mousePos: {x: 0, y: 0}
   startPos: {x: 0, y: 0}
   market: {fileID: 0}
@@ -6654,9 +6433,6 @@ MonoBehaviour:
   IsReloading: 0
   isShooting: 0
   nextFireTime: 0
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
 --- !u!212 &1911846922
 SpriteRenderer:
@@ -6698,11 +6474,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1518015849
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
   m_SortingLayer: 2
-=======
-  m_SortingLayer: 0
->>>>>>> Stashed changes
 =======
   m_SortingLayer: 0
 >>>>>>> Stashed changes
@@ -6716,10 +6488,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 =======
-=======
->>>>>>> Stashed changes
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
@@ -6821,9 +6590,6 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
@@ -7135,20 +6901,14 @@ SceneRoots:
   - {fileID: 487038693}
   - {fileID: 817535604}
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
   - {fileID: 31183697}
   - {fileID: 1572419456}
   - {fileID: 705134183}
 =======
-=======
->>>>>>> Stashed changes
   - {fileID: 531451459}
   - {fileID: 31183697}
   - {fileID: 1572419456}
   - {fileID: 705134183}
   - {fileID: 1362405391}
   - {fileID: 1887090989}
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
