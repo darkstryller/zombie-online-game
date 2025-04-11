@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     [Header("Interaction")]
     [SerializeField] private LayerMask interactableLayer;
     [SerializeField] private Transform interactPoint;
+    [SerializeField] private GunHolderScript gunHolder;
 
 #endregion
 
@@ -57,6 +58,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
             {
                 ONInteract();
             }
+            ChangeGuns();
         }
     }
 
@@ -94,6 +96,18 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
             StartCoroutine(ReloadEvade());
         }
         
+    }
+
+    void ChangeGuns()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            gunHolder.ChangeGun(0);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            gunHolder.ChangeGun(1);
+        }
     }
 
     IEnumerator EndEvade()
