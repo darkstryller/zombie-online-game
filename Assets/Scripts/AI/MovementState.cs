@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class MovementState : MonoBehaviour
 {
     [SerializeField] Transform Target;
+    public bool HasSeen;
     NavMeshAgent agent;
 
     private void Awake()
@@ -19,7 +20,7 @@ public class MovementState : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(transform.position != Target.position)
+        if(transform.position != Target.position && HasSeen)
         {
             agent.SetDestination(Target.position);
         }
