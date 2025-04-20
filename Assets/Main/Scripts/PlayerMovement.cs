@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     [SerializeField] private LayerMask interactableLayer;
     [SerializeField] private Transform interactPoint;
     [SerializeField] private GunHolderScript gunHolder;
+    private HealthScript health;
 
 #endregion
 
@@ -35,6 +36,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        health = GetComponent<HealthScript>();
         currentEvades = maxEvades; // Empezamos con las 2 cargas llenas
     }
 
@@ -58,7 +60,19 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
             {
                 ONInteract();
             }
+            
             ChangeGuns();
+
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                health.TakeDamage(10);
+                Debug.Log(health._currentHealth);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
         }
     }
 
