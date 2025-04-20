@@ -3,27 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MovementState : MonoBehaviour
+public class MovementState<T> : State<T>
 {
-    [SerializeField] Transform Target;
-    public bool HasSeen;
-    NavMeshAgent agent;
-
-    private void Awake()
+    Transform _self;
+    Transform _target;
+    NavMeshAgent _agent;
+    public MovementState( Transform self,Transform target, NavMeshAgent agent)
     {
-        agent = GetComponent<NavMeshAgent>();
-        agent.updateRotation = false;
-        agent.updateUpAxis = false;
+        _self = self;
+        _target = target;
+        _agent = agent;
     }
-
-
-    // Update is called once per frame
-    void Update()
+    public override void Execute()
     {
-        if(transform.position != Target.position && HasSeen)
+        base.Execute();
+        if (_agent != null) 
         {
-            agent.SetDestination(Target.position);
+            if( _target.position != _self.position)
+            {
+                _agent.SetDestination(_target.position);
+            }
         }
     }
-
 }

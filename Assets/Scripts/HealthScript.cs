@@ -8,7 +8,7 @@ public class HealthScript : MonoBehaviour
 #region  Variables
     public int maxHealth;
     public int _currentHealth => currentHealth;   
-    private int currentHealth;
+    [SerializeField] private int currentHealth;
 
 #endregion
 
@@ -16,7 +16,10 @@ public class HealthScript : MonoBehaviour
     {
         currentHealth = maxHealth;
     }
-
+    public void SetHealth(int myHealth)
+    {
+        maxHealth = myHealth;
+    }
     public void UpdateHealth() 
     {
         maxHealth = currentHealth;
