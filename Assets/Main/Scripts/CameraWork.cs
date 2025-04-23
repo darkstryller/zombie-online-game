@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class CameraWork : MonoBehaviour
-{
+{ // un script simple en donde la camara sigue al jugador con un lerp entre su posicion, la posicion del jugador sumado el offset y una velocidad
     private Transform target;
 
     [SerializeField] private Vector3 offset = new Vector3(0, 0, -10);
