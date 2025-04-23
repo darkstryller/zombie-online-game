@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bar: {fileID: 5677844601477470235}
-  health: {fileID: 3872346795596262163}
+  health: {fileID: 84817972951477225}
 --- !u!1 &290032154372001787
 GameObject:
   m_ObjectHideFlags: 0
@@ -1156,7 +1156,7 @@ GameObject:
   - component: {fileID: 556956442942914073}
   - component: {fileID: 6907369757501335357}
   - component: {fileID: 5362490943719637176}
-  - component: {fileID: 3872346795596262163}
+  - component: {fileID: 84817972951477225}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -1385,7 +1385,7 @@ MonoBehaviour:
   interactPoint: {fileID: 7870259376703249029}
   gunHolder: {fileID: 7229772136937072834}
   cameraFollow: {fileID: 0}
---- !u!114 &3872346795596262163
+--- !u!114 &84817972951477225
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1394,10 +1394,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8869895996242752674}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96328e411f3a3074d8ac9fa9516efeb0, type: 3}
+  m_Script: {fileID: 11500000, guid: f0f059aeb36053f4b8072995a70271be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 0
 --- !u!1 &8913210609510920174
 GameObject:
   m_ObjectHideFlags: 0

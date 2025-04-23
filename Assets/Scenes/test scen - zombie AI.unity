@@ -453,7 +453,7 @@ GameObject:
   m_Component:
   - component: {fileID: 548085728}
   - component: {fileID: 548085727}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1176,8 +1176,8 @@ GameObject:
   - component: {fileID: 1108157531}
   - component: {fileID: 1108157530}
   - component: {fileID: 1108157532}
-  - component: {fileID: 1108157534}
   - component: {fileID: 1108157533}
+  - component: {fileID: 1108157534}
   m_Layer: 0
   m_Name: zombie
   m_TagString: Untagged
@@ -1331,7 +1331,7 @@ MonoBehaviour:
   angle: 360
   obsMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
 --- !u!114 &1108157534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1341,10 +1341,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1108157526}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96328e411f3a3074d8ac9fa9516efeb0, type: 3}
+  m_Script: {fileID: 11500000, guid: f0f059aeb36053f4b8072995a70271be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2
+  maxHealth: 100
   currentHealth: 0
 --- !u!1 &1586041505
 GameObject:
