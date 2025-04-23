@@ -1354,7 +1354,7 @@ MonoBehaviour:
     ExtrapolateIncludingRoundTripTime: 1
     ExtrapolateNumberOfStoredPositions: 1
   m_RotationModel:
-    SynchronizeEnabled: 1
+    SynchronizeEnabled: 0
     InterpolateOption: 1
     InterpolateRotateTowardsSpeed: 180
     InterpolateLerpSpeed: 5
@@ -1384,6 +1384,7 @@ MonoBehaviour:
     m_Bits: 128
   interactPoint: {fileID: 7870259376703249029}
   gunHolder: {fileID: 7229772136937072834}
+  cameraFollow: {fileID: 0}
 --- !u!114 &3872346795596262163
 MonoBehaviour:
   m_ObjectHideFlags: 0

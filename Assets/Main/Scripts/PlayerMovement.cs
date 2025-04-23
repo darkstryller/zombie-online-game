@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     [SerializeField] private int maxEvades = 2;  // Máximo de cargas de esquive
     private int currentEvades;  // Cargas disponibles
     private float evadeDuration = 0.2f;
-    [SerializeField] private float evadeCooldown = 2f; // Tiempo de recarga por carga
+    [SerializeField] private float evadeCooldown = 2f; // Tiempo de cooldown por carga de esquive
     
     private Vector2 mousePos;
     private Rigidbody2D rb;
@@ -28,17 +28,42 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     [SerializeField] private LayerMask interactableLayer;
     [SerializeField] private Transform interactPoint;
     [SerializeField] private GunHolderScript gunHolder;
+    [SerializeField] private CameraWork cameraFollow;
     private HealthScript health;
+    private Camera mainCamera;
 
 #endregion
 
 #region Metodos
-    void Start()
+void Start()
+{
+    rb = GetComponent<Rigidbody2D>();
+    health = GetComponent<HealthScript>();
+    currentEvades = maxEvades;
+    mainCamera = Camera.main;
+
+    if (photonView.IsMine) // Verifica si este es el jugador local
     {
-        rb = GetComponent<Rigidbody2D>();
-        health = GetComponent<HealthScript>();
-        currentEvades = maxEvades; // Empezamos con las 2 cargas llenas
+        cameraFollow = mainCamera.GetComponent<CameraWork>();
+
+        if (cameraFollow != null)
+        {
+            cameraFollow.SetPlayer(transform);  // Asigna la cámara para el jugador local
+        }
+        else
+        {
+            Debug.LogError("No se encontró el script CameraWork en la cámara principal.");
+        }
     }
+    else
+    {
+        Camera camera = GetComponentInChildren<Camera>();
+        if (camera != null)
+        {
+            camera.gameObject.SetActive(false); // Desactiva la cámara del jugador remoto
+        }
+    }
+}
 
     void Update()
     {
@@ -103,10 +128,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
             rb.velocity = Vector2.zero;
             rb.AddForce(dir.normalized * evadeForce, ForceMode2D.Impulse);
 
-            // Empezamos el temporizador de evasión
             StartCoroutine(EndEvade());
-
-            // Iniciamos la recarga de esa carga gastada
             StartCoroutine(ReloadEvade());
         }
         
@@ -147,9 +169,17 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
 
     void Look()
     {
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        float angle = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg - 90f;
-        transform.localRotation = Quaternion.Euler(0, 0, angle);
+        if (!photonView.IsMine) return; // chequeo x las dudas
+
+        if (mainCamera == null) return;
+
+        Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        mouseWorldPos.z = transform.position.z;
+
+        Vector2 direction = (mouseWorldPos - transform.position).normalized;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+
+        transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
     private void ONInteract()
