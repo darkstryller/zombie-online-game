@@ -80,17 +80,29 @@ public class Gun : MonoBehaviourPunCallbacks, IGun
         {
             currentAmmo--;
             shotsFired++;
-            RaycastHit2D hit = Physics2D.Raycast(startPos, (mousePos - startPos).normalized, gunData._range);
-            Debug.DrawLine(startPos, startPos + (mousePos - startPos).normalized * gunData._range, Color.red, 0.1f);
-
-            if (hit)
+    
+            // Calculo entre el punto de disparo y la posición del mouse
+            Vector2 direction = (mousePos - startPos).normalized;
+    
+            // distancia entre el punto de disparo y el mouse
+            float distanceToMouse = Vector2.Distance(startPos, mousePos);
+    
+            // Limito la distancia del raycast al rango del arma
+            float range = Mathf.Min(distanceToMouse, gunData._range);
+           
+            RaycastHit2D hit = Physics2D.Raycast(startPos, direction, range);
+    
+            // se dibuja la linea hasta el rango del arma
+            Debug.DrawLine(startPos, startPos + direction * range, Color.red, 0.1f);
+    
+            // Solo aplica daño si el raycast golpea algo dentro del rango
+            if (hit.collider != null && hit.distance <= range)
             {
                 IDamageable damageable = hit.collider.GetComponent<IDamageable>();
-
                 if (damageable != null)
                 {
                     damageable.GetDamage(gunData._damage);
-                    Debug.Log("<color=yellow>" + damageable + "</color>" + " Se comió "  + "<color=yellow>" + gunData._damage + "</color>" + " de daño");
+                    Debug.Log("<color=yellow>" + damageable + "</color>" + " Se comió " + "<color=yellow>" + gunData._damage + "</color>" + " de daño");
                 }
             }
         }
