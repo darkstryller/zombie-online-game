@@ -14,6 +14,7 @@ public class Gun : MonoBehaviourPunCallbacks, IGun
     [SerializeField] Transform shootPoint;
     [SerializeField] private Text ammoCount;
     [SerializeField] private Text maxAmmoCount;
+    [SerializeField] private LayerMask zombieMask;
 
     private Vector2 mousePos;
     private Vector2 startPos;
@@ -30,7 +31,7 @@ public class Gun : MonoBehaviourPunCallbacks, IGun
 #region Metodos de Unity
     void Start()
     {
-        market = FindObjectOfType<MarketScript>();
+       // market = FindObjectOfType<MarketScript>();
         ammoClip = gunData._clipAmmo;
         currentAmmo = ammoClip;
         maxAmmo = gunData._maxAmmo;
@@ -76,7 +77,7 @@ public class Gun : MonoBehaviourPunCallbacks, IGun
    
     public void Shoot()
     {
-        if (market != null && !market._IsShooping && !IsReloading)
+        if (/*market != null && !market._IsShooping &&*/ !IsReloading)  // las comprobaciones comentadas son por el mercado 
         {
             currentAmmo--;
             shotsFired++;
@@ -90,7 +91,7 @@ public class Gun : MonoBehaviourPunCallbacks, IGun
             // Limito la distancia del raycast al rango del arma
             float range = Mathf.Min(distanceToMouse, gunData._range);
            
-            RaycastHit2D hit = Physics2D.Raycast(startPos, direction, range);
+            RaycastHit2D hit = Physics2D.Raycast(startPos, direction, range, zombieMask);
     
             // se dibuja la linea hasta el rango del arma
             Debug.DrawLine(startPos, startPos + direction * range, Color.red, 0.1f);
@@ -99,6 +100,7 @@ public class Gun : MonoBehaviourPunCallbacks, IGun
             if (hit.collider != null && hit.distance <= range)
             {
                 IDamageable damageable = hit.collider.GetComponent<IDamageable>();
+
                 if (damageable != null)
                 {
                     damageable.GetDamage(gunData._damage);
@@ -120,10 +122,10 @@ public class Gun : MonoBehaviourPunCallbacks, IGun
         int ammoNeeded = ammoClip - currentAmmo; // Cuántas balas faltan para llenar el cargador
         int ammoToLoad = Mathf.Min(ammoNeeded, maxAmmo); // Carga solo lo que haya disponible
 
-        currentAmmo += ammoToLoad; // Añadir balas al cargador
-        maxAmmo -= ammoToLoad; // Restar de la reserva
+        currentAmmo += ammoToLoad; // añade las balas al cargador y resta de la reserva
+        maxAmmo -= ammoToLoad; 
 
-        IsReloading = false; // Termina la recarga
+        IsReloading = false; 
     }
 
     public void GetAmmo()
@@ -136,7 +138,6 @@ public class Gun : MonoBehaviourPunCallbacks, IGun
         currentAmmo = gunData._clipAmmo;
         maxAmmo = gunData._maxAmmo;
     }
-
    
     #endregion
 }

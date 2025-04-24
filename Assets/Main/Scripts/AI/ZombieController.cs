@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ZombieController : MonoBehaviour
+public class ZombieController : MonoBehaviour, IDamageable
 {
     NavMeshAgent _agent;
     LineOfSightMono _los;
-    HealthScript _health;
+    HealthScript health;
     [SerializeField] EnemyStats _stats;
     [SerializeField] GameObject _target;
 
@@ -17,23 +17,34 @@ public class ZombieController : MonoBehaviour
     {
         _agent = GetComponent<NavMeshAgent>();
         _los = GetComponent<LineOfSightMono>();
-        _health = GetComponent<HealthScript>();
+        health = GetComponent<HealthScript>();
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
+        health.maxHealth = _stats._health;
         Debug.Log("default speed es: " + _agent.speed);
         
     }
     void Start()
     {
         _agent.speed = _stats._speed;
-        _health.SetHealth(_stats._health);
         InitializeFSM();
         InitializeTree();
     }
+    
     void Update()
     {
         _fsm.OnExecute();
         _root.Execute();
+        
+        if (health._currentHealth <= 0)
+        {
+            Debug.Log("AAAAAAAAAA");
+        }
+    }
+
+    public void GetDamage(int damage)
+    {
+        health.TakeDamage(damage);
     }
 
     void InitializeFSM()
@@ -63,7 +74,7 @@ public class ZombieController : MonoBehaviour
         ITreeNode dead = new ActionNode(() => _fsm.Transition(StateEnum.DEATH));
 
         ITreeNode qHasSeenFoe = new QuestionNode(questionHasSeenFoe, move, idle);
-        ITreeNode qIsAlive = new QuestionNode(_health.IsAlive, qHasSeenFoe, dead);
+        ITreeNode qIsAlive = new QuestionNode(health.IsAlive, qHasSeenFoe, dead);
 
         _root = qIsAlive;
     }

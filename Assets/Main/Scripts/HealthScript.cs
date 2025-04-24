@@ -16,10 +16,7 @@ public class HealthScript : MonoBehaviour
     {
         currentHealth = maxHealth;
     }
-    public void SetHealth(int myHealth)
-    {
-        maxHealth = myHealth;
-    }
+
     public void UpdateHealth() 
     {
         maxHealth = currentHealth;

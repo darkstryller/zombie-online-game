@@ -12,13 +12,11 @@ public class hitboxScript : MonoBehaviour
         if(((1 << collision.gameObject.layer) & targetlayer) != 0)
         {
             var health = collision.gameObject.GetComponent<HealthScript>();
+            
             if (health != null)
             {
                 health.TakeDamage(stats._damage);
             }
         }
-            
-        
     }
-    
 }

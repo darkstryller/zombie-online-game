@@ -64,7 +64,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 124096449
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &9134176583901199962
@@ -388,7 +388,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1781906639
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 30c24eb8d6b9c1f439c140cf78f8e454, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -486,7 +486,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1518015849
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f92d7caeecbce984eae5c9bf3aa695b9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -515,6 +515,9 @@ MonoBehaviour:
   shootPoint: {fileID: 3473259617816549749}
   ammoCount: {fileID: 2481419898442504482}
   maxAmmoCount: {fileID: 7128427003720627936}
+  zombieMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &3897390868079599731
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,7 +696,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1518015849
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f92d7caeecbce984eae5c9bf3aa695b9, type: 3}
   m_Color: {r: 0, g: 1, b: 0.07460141, a: 1}
@@ -722,6 +725,9 @@ MonoBehaviour:
   shootPoint: {fileID: 4954883969699123143}
   ammoCount: {fileID: 2481419898442504482}
   maxAmmoCount: {fileID: 7128427003720627936}
+  zombieMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &4912476461898246190
 GameObject:
   m_ObjectHideFlags: 0
@@ -1254,7 +1260,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1781906639
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c7755dd7e6e1c34428a453d11c102cdb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
