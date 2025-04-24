@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     [SerializeField] private CameraWork cameraFollow;
     private HealthScript health;
     private Camera mainCamera;
+    [SerializeField] private GameObject uiCanvas;
 
 #endregion
 
@@ -42,9 +43,10 @@ void Start()
     currentEvades = maxEvades;
     mainCamera = Camera.main;
 
-    if (photonView.IsMine) // Verifica si este es el jugador local
+    if (photonView.IsMine) 
     {
         cameraFollow = mainCamera.GetComponent<CameraWork>();
+        uiCanvas.SetActive(true);
 
         if (cameraFollow != null)
         {
@@ -58,6 +60,7 @@ void Start()
     else
     {
         Camera camera = GetComponentInChildren<Camera>();
+
         if (camera != null)
         {
             camera.gameObject.SetActive(false); // Desactiva la cámara del jugador remoto
@@ -124,7 +127,7 @@ void Start()
         if (rb.velocity != Vector2.zero)
         {
             isEvading = true;
-            currentEvades--;  // Gastamos una carga
+            currentEvades--;  
             rb.velocity = Vector2.zero;
             rb.AddForce(dir.normalized * evadeForce, ForceMode2D.Impulse);
 
@@ -156,7 +159,7 @@ void Start()
     {
         yield return new WaitForSeconds(evadeCooldown);
 
-        if (currentEvades < maxEvades) // Solo recargamos si hay menos de 2 cargas
+        if (currentEvades < maxEvades) // Solo se recargan si hay menos del maximo de cargas
         {
             currentEvades++;
         }
