@@ -1004,6 +1004,10 @@ MonoBehaviour:
   - {fileID: 1542375860}
   - {fileID: 1712899862}
   zombiePrefab: {fileID: 1572419450}
+  maxTime: 10
+  currentTime: 0
+  maxWaves: 4
+  waveCount: 0
 --- !u!4 &705134183
 Transform:
   m_ObjectHideFlags: 0
