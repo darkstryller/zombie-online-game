@@ -17,7 +17,7 @@ public class ZombieSpawner : MonoBehaviour
 
     void Start()
     {
-       // Spawn();
+        StartSpawn();
     }
 
     void Update()
@@ -36,6 +36,14 @@ public class ZombieSpawner : MonoBehaviour
         if (waveCount == maxWaves)
         {
             canSpawn = false;
+        }
+    }
+
+    void StartSpawn()
+    {
+        for (int i = 0; i < spawnPoints.Length; i++)
+        {
+            Instantiate(zombiePrefab, spawnPoints[i].position, quaternion.identity);
         }
     }
 
