@@ -22,7 +22,7 @@ public class LineOfSightMono : MonoBehaviour
 
     public bool CheckAngle(Transform target)
     {
-        return CheckAngle(target, transform.up);
+        return CheckAngle(target, transform.forward);
     }
     public bool CheckAngle(Transform target, Vector2 front)
     {
@@ -47,7 +47,7 @@ public class LineOfSightMono : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, range);
 
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, Quaternion.Euler(0, angle / 2, 0) * transform.up * range);
-        Gizmos.DrawRay(transform.position, Quaternion.Euler(0, -angle / 2, 0) * transform.up * range);
+        Gizmos.DrawRay(transform.position, Quaternion.Euler(0, angle / 2, 0) * transform.forward * range);
+        Gizmos.DrawRay(transform.position, Quaternion.Euler(0, -angle / 2, 0) * transform.forward * range);
     }
 }

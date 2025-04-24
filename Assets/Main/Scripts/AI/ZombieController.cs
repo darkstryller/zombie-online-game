@@ -9,7 +9,7 @@ public class ZombieController : MonoBehaviour
     LineOfSightMono _los;
     HealthScript _health;
     [SerializeField] EnemyStats _stats;
-    [SerializeField] Transform _target;
+    [SerializeField] GameObject _target;
 
     FSM<StateEnum> _fsm;
     ITreeNode _root;
@@ -41,7 +41,7 @@ public class ZombieController : MonoBehaviour
         _fsm = new FSM<StateEnum>();
 
         var idle = new IdleState<StateEnum>();
-        var move = new MovementState<StateEnum>(transform, _target, _agent);
+        var move = new MovementState<StateEnum>(transform, _target.transform, _agent);
         var dead = new deathState<StateEnum>(gameObject);
 
         idle.AddTransition(StateEnum.MOVE, move);
@@ -71,6 +71,6 @@ public class ZombieController : MonoBehaviour
     bool questionHasSeenFoe()
     {
 
-        return _los.LOS(_target);
+        return _los.LOS(_target.transform);
     }
 }
