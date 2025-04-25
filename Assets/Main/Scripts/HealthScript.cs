@@ -11,6 +11,7 @@ public class HealthScript : MonoBehaviour
     [SerializeField] private int currentHealth;
 
 #endregion
+    public bool isLocalPlayer;
 
     void Start()
     {
@@ -27,7 +28,15 @@ public class HealthScript : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
+        if (currentHealth > 0)
+        {
+            currentHealth -= damage;
+        }
+        else
+        {
+            GameManager.instance.RespawnPlayer();
+            Destroy(gameObject);
+        }
     }
 
     public int GetCurrentHealth()
@@ -43,6 +52,7 @@ public class HealthScript : MonoBehaviour
         {
             currentHealth = maxHealth;
         }
+
     }
 
     public bool IsAlive()
