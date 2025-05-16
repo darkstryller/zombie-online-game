@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Photon.Pun;
 
-public class ZombieController : MonoBehaviour, IDamageable
+public class ZombieController : MonoBehaviourPunCallbacks, IDamageable
 {
     NavMeshAgent _agent;
     LineOfSightMono _los;
@@ -21,11 +22,11 @@ public class ZombieController : MonoBehaviour, IDamageable
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
         health.maxHealth = _stats._health;
-        Debug.Log("default speed es: " + _agent.speed);
         
     }
     void Start()
     {
+        _target = FindAnyObjectByType<PlayerMovement>().gameObject;
         _agent.speed = _stats._speed;
         InitializeFSM();
         InitializeTree();
@@ -35,7 +36,7 @@ public class ZombieController : MonoBehaviour, IDamageable
     {
         _fsm.OnExecute();
         _root.Execute();
-        
+        Debug.Log("player pos: " + _target.transform.position);
         if (health._currentHealth <= 0)
         {
             Debug.Log("AAAAAAAAAA");
@@ -81,7 +82,8 @@ public class ZombieController : MonoBehaviour, IDamageable
 
     bool questionHasSeenFoe()
     {
-
+        Debug.Log(_los.LOS(_target.transform));
         return _los.LOS(_target.transform);
+        
     }
 }

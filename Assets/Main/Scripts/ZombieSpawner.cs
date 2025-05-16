@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using Photon.Pun;
 
 public class ZombieSpawner : MonoBehaviour
 {
@@ -41,9 +42,11 @@ public class ZombieSpawner : MonoBehaviour
 
     void Spawn()
     {
+        if(PhotonNetwork.IsMasterClient)
         for (int i = 0; i < spawnPoints.Length; i++)
         {
-            Instantiate(zombiePrefab, spawnPoints[i].position, quaternion.identity);
+            PhotonNetwork.Instantiate("zombie", spawnPoints[i].position, quaternion.identity);
+            //Instantiate(zombiePrefab, spawnPoints[i].position, quaternion.identity);
         }
 
         waveCount++;

@@ -521,7 +521,7 @@ Transform:
   m_GameObject: {fileID: 548085726}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.2, y: -0.14, z: 0}
+  m_LocalPosition: {x: 1.85, y: 2.96, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1073,7 +1073,7 @@ GameObject:
   - component: {fileID: 1084360881}
   - component: {fileID: 1084360883}
   - component: {fileID: 1084360882}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: obs (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1314,7 +1314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stats: {fileID: 11400000, guid: 7d1bbd6f42f7d2d44a2e94569c8ee526, type: 2}
-  _target: {fileID: 548085728}
+  _target: {fileID: 548085726}
 --- !u!114 &1108157533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1331,7 +1331,7 @@ MonoBehaviour:
   angle: 360
   obsMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 8
 --- !u!114 &1108157534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1357,7 +1357,7 @@ GameObject:
   - component: {fileID: 1586041506}
   - component: {fileID: 1586041508}
   - component: {fileID: 1586041507}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: obs
   m_TagString: Untagged
   m_Icon: {fileID: 0}

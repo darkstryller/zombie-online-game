@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Photon;
 using Photon.Pun;
+using Unity.Mathematics;
+using UnityEditor.SearchService;
 using UnityEngine;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] private PhotonView playerPrefab;
-    [SerializeField] private Transform spawnPoint;
+    [SerializeField] private Vector3 spawnPoint;
 
     void Start()
     {
@@ -18,12 +20,14 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("OnConnectedToMaster");
         PhotonNetwork.JoinRandomOrCreateRoom();
+        PhotonNetwork.LoadLevel("test");
     }
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint.position, spawnPoint.rotation);
+        PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint, quaternion.Euler(spawnPoint));
         print(playerPrefab.ViewID);
+        
       //  print(PhotonNetwork.NickName);
     }
 

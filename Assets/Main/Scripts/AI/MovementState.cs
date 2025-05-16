@@ -24,5 +24,6 @@ public class MovementState<T> : State<T>
                 _agent.SetDestination(_target.position);
             }
         }
+
     }
 }
