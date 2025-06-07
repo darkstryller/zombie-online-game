@@ -11,11 +11,13 @@ public class ZombieController : MonoBehaviourPunCallbacks, IDamageable
     HealthScript health;
     [SerializeField] EnemyStats _stats;
     [SerializeField] GameObject _target;
+    ZombieView _view;
 
     FSM<StateEnum> _fsm;
     ITreeNode _root;
     void Awake()
     {
+        _view = GetComponent<ZombieView>();
         _agent = GetComponent<NavMeshAgent>();
         _los = GetComponent<LineOfSightMono>();
         health = GetComponent<HealthScript>();
@@ -53,7 +55,7 @@ public class ZombieController : MonoBehaviourPunCallbacks, IDamageable
         _fsm = new FSM<StateEnum>();
 
         var idle = new IdleState<StateEnum>();
-        var move = new MovementState<StateEnum>(transform, _target.transform, _agent);
+        var move = new MovementState<StateEnum>(transform, _target.transform, _agent, _view);
         var dead = new deathState<StateEnum>(gameObject);
 
         idle.AddTransition(StateEnum.MOVE, move);

@@ -8,11 +8,18 @@ public class MovementState<T> : State<T>
     Transform _self;
     Transform _target;
     NavMeshAgent _agent;
-    public MovementState( Transform self,Transform target, NavMeshAgent agent)
+    ZombieView _view;
+    public MovementState( Transform self,Transform target, NavMeshAgent agent, ZombieView view)
     {
         _self = self;
         _target = target;
         _agent = agent;
+        _view = view;
+    }
+    public override void Enter()
+    {
+        base.Enter();
+        _view.Walk();
     }
     public override void Execute()
     {
