@@ -10,4 +10,8 @@ public class EnemyStats : ScriptableObject
     [field: SerializeField] public int _range {get; private set;}
     [field: SerializeField] public float _speed {get; private set;}
     [field: SerializeField] public LayerMask _attackLayer {get; private set;}
+    [field: SerializeField] public float _attackDistance { get; private set; }
+    [field: SerializeField] public float _attackDuration { get; private set; }
+    [field: SerializeField] public float _minAttackRange { get; private set; }
+
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Photon.Pun;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
 public class ZombieController : MonoBehaviourPunCallbacks, IDamageable
 {
@@ -15,6 +16,7 @@ public class ZombieController : MonoBehaviourPunCallbacks, IDamageable
 
     FSM<StateEnum> _fsm;
     ITreeNode _root;
+    Coroutine _searchTarget;
     void Awake()
     {
         _view = GetComponent<ZombieView>();
@@ -24,6 +26,7 @@ public class ZombieController : MonoBehaviourPunCallbacks, IDamageable
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
         health.maxHealth = _stats._health;
+        
         
     }
     void Start()
@@ -38,7 +41,6 @@ public class ZombieController : MonoBehaviourPunCallbacks, IDamageable
     {
         _fsm.OnExecute();
         _root.Execute();
-        Debug.Log("player pos: " + _target.transform.position);
         if (health._currentHealth <= 0)
         {
             Debug.Log("AAAAAAAAAA");
@@ -54,18 +56,26 @@ public class ZombieController : MonoBehaviourPunCallbacks, IDamageable
     {
         _fsm = new FSM<StateEnum>();
 
-        var idle = new IdleState<StateEnum>();
+        var idle = new IdleState<StateEnum>(_agent, LostTarget);
         var move = new MovementState<StateEnum>(transform, _target.transform, _agent, _view);
         var dead = new deathState<StateEnum>(gameObject);
+        var attack = new AttackState<StateEnum>(_view, _agent);
 
         idle.AddTransition(StateEnum.MOVE, move);
         idle.AddTransition(StateEnum.DEATH, dead);
+        idle.AddTransition(StateEnum.ATTACK, attack);
 
         move.AddTransition(StateEnum.IDLE, idle);
         move.AddTransition(StateEnum.DEATH, dead);
+        move.AddTransition(StateEnum.ATTACK, attack);
 
         dead.AddTransition(StateEnum.IDLE, idle);
         dead.AddTransition(StateEnum.MOVE, move);
+        dead.AddTransition(StateEnum.ATTACK, attack);
+
+        attack.AddTransition(StateEnum.IDLE, idle);
+        attack.AddTransition(StateEnum.MOVE, move);
+        attack.AddTransition(StateEnum.DEATH, dead);
 
         _fsm.SetInit(idle);
     }
@@ -75,8 +85,10 @@ public class ZombieController : MonoBehaviourPunCallbacks, IDamageable
         ITreeNode idle = new ActionNode(() => _fsm.Transition(StateEnum.IDLE));
         ITreeNode move = new ActionNode(() => _fsm.Transition(StateEnum.MOVE));
         ITreeNode dead = new ActionNode(() => _fsm.Transition(StateEnum.DEATH));
+        ITreeNode attack = new ActionNode(() => _fsm.Transition(StateEnum.ATTACK));
 
-        ITreeNode qHasSeenFoe = new QuestionNode(questionHasSeenFoe, move, idle);
+        ITreeNode qIsOnAttackRange = new QuestionNode(questionIsOnAttackRange, attack, move);
+        ITreeNode qHasSeenFoe = new QuestionNode(questionHasSeenFoe, qIsOnAttackRange, idle);
         ITreeNode qIsAlive = new QuestionNode(health.IsAlive, qHasSeenFoe, dead);
 
         _root = qIsAlive;
@@ -87,5 +99,48 @@ public class ZombieController : MonoBehaviourPunCallbacks, IDamageable
         Debug.Log(_los.LOS(_target.transform));
         return _los.LOS(_target.transform);
         
+    }
+
+    bool questionIsOnAttackRange()
+    {
+        var los = _los;
+        float range = _stats._minAttackRange;
+        if(los.CheckRange(_target.transform, range))
+        return true;
+        else return false;
+    }
+
+    void LostTarget()
+    {
+        Debug.Log("perdi target, tengo 1,5 segundos");
+        _searchTarget = StartCoroutine(TargetSearchTimer(1.5f));
+    }
+
+    IEnumerator TargetSearchTimer(float time)
+    {
+        yield return new WaitForSeconds(time);
+        _agent.SetDestination(transform.position);
+        _view.Walk(0);
+    }
+    void DashAttack()
+    {
+        StartCoroutine(DashAttackCoroutine());
+
+    }
+    IEnumerator DashAttackCoroutine()
+    {
+        int steps = 10;
+        float stepTime = _stats._attackDuration / steps;
+        float stepDistance = _stats._attackDistance / steps;
+
+        Vector2 direction = _target.transform.position - transform.position;
+        
+        for (int i = 0; i < steps; i++)
+        {
+            
+            transform.Translate(direction.normalized * stepDistance);
+            yield return new WaitForSeconds(stepTime);
+        }
+
     }
 }

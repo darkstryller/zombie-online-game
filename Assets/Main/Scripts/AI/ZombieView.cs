@@ -7,11 +7,13 @@ public class ZombieView : MonoBehaviour
 {
     [SerializeField] Animator _animator;
 
-    public Action Walk;
+    public Action<int> Walk;
+    public Action Attack;
     // Start is called before the first frame update
     void Start()
     {
         Walk += IsWalking;
+        Attack += IsAttacking;
     }
 
     // Update is called once per frame
@@ -20,8 +22,13 @@ public class ZombieView : MonoBehaviour
         
     }
 
-    void IsWalking()
+    void IsWalking(int value)
     {
-        _animator.SetInteger("walking", 1);
+        _animator.SetInteger("walking", value);
+    }
+
+    void IsAttacking()
+    {
+        _animator.SetTrigger("attack");
     }
 }

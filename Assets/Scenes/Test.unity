@@ -814,7 +814,7 @@ MonoBehaviour:
   zombiePrefab: {fileID: 2643109736072550674, guid: 521312be30ea4474b83d7edcc15a7111, type: 3}
   maxTime: 10
   currentTime: 0
-  maxWaves: 4
+  maxWaves: 1
   waveCount: 0
 --- !u!4 &705134183
 Transform:
@@ -1864,7 +1864,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 556956442942914073, guid: ca3db3198d2843245a55855f9d15de6e, type: 3}
-  spawnPoint: {fileID: 1097546293}
+  spawnPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &1359747421
 Transform:
   m_ObjectHideFlags: 0

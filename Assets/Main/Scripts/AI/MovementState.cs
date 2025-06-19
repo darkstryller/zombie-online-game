@@ -19,7 +19,7 @@ public class MovementState<T> : State<T>
     public override void Enter()
     {
         base.Enter();
-        _view.Walk();
+        _view.Walk(1);
     }
     public override void Execute()
     {

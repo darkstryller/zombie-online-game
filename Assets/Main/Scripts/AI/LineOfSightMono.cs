@@ -9,6 +9,10 @@ public class LineOfSightMono : MonoBehaviour
     public LayerMask obsMask;
     public bool CheckRange(Transform target)
     {
+        return CheckRange(target, range);
+    }
+    public bool CheckRange(Transform target, float range)
+    {
         //A->B
         //B-A
         //A: Self
@@ -19,7 +23,6 @@ public class LineOfSightMono : MonoBehaviour
         float distance = dir.magnitude;
         return distance <= range;
     }
-
     public bool CheckAngle(Transform target)
     {
         return CheckAngle(target, transform.up);
