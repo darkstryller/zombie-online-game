@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c57fb9952acb7fd4eb2e5fcd3a7cf5bf
+guid: 647b127e5ad7a2c4d8ae3800921d05aa
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 400
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: rifle de asalto_0
+      name: Idle Player_0
       rect:
         serializedVersion: 2
-        x: 367
-        y: 1539
-        width: 1797
-        height: 509
+        x: 512
+        y: 832
+        width: 288
+        height: 480
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c2523dfdc22bfa4d82df3f2372def3e
-      internalID: 451361467
+      spriteID: b27505dbaff396a44ad839018f1aa4b8
+      internalID: -1066158967
       vertices: []
       indices: 
       edges: []
@@ -141,7 +141,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      rifle de asalto_0: 451361467
+      Idle Player_0: -1066158967
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

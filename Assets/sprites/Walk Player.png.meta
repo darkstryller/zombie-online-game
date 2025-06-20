@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c57fb9952acb7fd4eb2e5fcd3a7cf5bf
+guid: cecaff4ab2b781a4baf2da5fc6413fb4
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 400
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: rifle de asalto_0
+      name: Walk Player_0
       rect:
         serializedVersion: 2
-        x: 367
-        y: 1539
-        width: 1797
-        height: 509
+        x: 508
+        y: 830
+        width: 297
+        height: 487
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,8 +124,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c2523dfdc22bfa4d82df3f2372def3e
-      internalID: 451361467
+      spriteID: a6106fbabfb7ce44b94723826042844d
+      internalID: -1488596160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk Player_1
+      rect:
+        serializedVersion: 2
+        x: 2108
+        y: 830
+        width: 297
+        height: 487
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efbc22b49926ab8468f3825ac05670bf
+      internalID: 1096568701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk Player_2
+      rect:
+        serializedVersion: 2
+        x: 3708
+        y: 830
+        width: 297
+        height: 487
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bb8144dd42832d45887c6c426808a40
+      internalID: 1319699144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk Player_3
+      rect:
+        serializedVersion: 2
+        x: 5308
+        y: 830
+        width: 297
+        height: 487
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd4618404354c284a8af9e3dcb9e2d99
+      internalID: 1231650753
       vertices: []
       indices: 
       edges: []
@@ -141,7 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      rifle de asalto_0: 451361467
+      Walk Player_0: -1488596160
+      Walk Player_1: 1096568701
+      Walk Player_2: 1319699144
+      Walk Player_3: 1231650753
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

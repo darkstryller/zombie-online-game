@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     private HealthScript health;
     private Camera mainCamera;
     [SerializeField] private GameObject uiCanvas;
+    [SerializeField] private playerView view;
 
 #endregion
 
@@ -40,6 +41,7 @@ void Start()
 {
     rb = GetComponent<Rigidbody2D>();
     health = GetComponent<HealthScript>();
+    view = GetComponent<playerView>();
     currentEvades = maxEvades;
     mainCamera = Camera.main;
 
@@ -112,8 +114,12 @@ void Start()
             {
                 return;
             }
-            
+            view.WalkOn();
             Move();
+        }
+        else
+        {
+            view.WalkOff();
         }
     }
 
