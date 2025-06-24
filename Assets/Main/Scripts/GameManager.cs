@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Photon;
 using Photon.Pun;
 using Unity.Mathematics;
-using UnityEditor.SearchService;
 using UnityEngine;
 
 public class GameManager : MonoBehaviourPunCallbacks
@@ -13,22 +12,24 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        PhotonNetwork.ConnectUsingSettings();
-    }
-
-    public override void OnConnectedToMaster()
-    {
-        Debug.Log("OnConnectedToMaster");
         PhotonNetwork.JoinRandomOrCreateRoom();
-        PhotonNetwork.LoadLevel("test");
+    }
+    /*
+        public override void OnConnectedToMaster()
+        {
+            Debug.Log("OnConnectedToMaster");
+            PhotonNetwork.JoinRandomOrCreateRoom();
+            PhotonNetwork.LoadLevel("test");
+        }*/
+
+    public override void OnJoinedRoom() // cuando se une a la room
+    {
+        GameObject player = PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint, quaternion.Euler(spawnPoint));
+        player.GetComponent<PhotonView>().RPC("RPC_SetPlayerName", RpcTarget.AllBuffered, PlayerPrefs.GetString("PlayerNickname")); // rpc para poner nickname al jugador
+
+      //  print(playerPrefab.ViewID);
+        print(PhotonNetwork.NickName);
     }
 
-    public override void OnJoinedRoom()
-    {
-        PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint, quaternion.Euler(spawnPoint));
-        print(playerPrefab.ViewID);
-        
-      //  print(PhotonNetwork.NickName);
-    }
 
 }
