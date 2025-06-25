@@ -59,7 +59,7 @@ public class Lobby : MonoBehaviourPunCallbacks // cuando se "conecta" que te lle
         }
 
         int count = ConnectionManager.Instance.GetPlayersInRoom().Count;
-        createRoomButton.interactable = count >= 1 && count <= 4;
+        createRoomButton.interactable = count >= 2 && count <= 4;
 
     }
    
