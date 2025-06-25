@@ -16,28 +16,26 @@ public class Lobby : MonoBehaviourPunCallbacks // cuando se "conecta" que te lle
  //   [SerializeField] private InputField roomNameInput;
  //   [SerializeField] private TMP_Text roomNameText;
     [SerializeField] private TMP_Text[] playerNickNameTexts;
-     /*
-       [SerializeField] private TMP_Text playerTwoText;
-       [SerializeField] private TMP_Text playerThreeText;
-       [SerializeField] private TMP_Text playerFourText; */
-
+    [SerializeField] private GameManager manager;
 
     void Start()
     {
         createRoomButton.onClick.AddListener(OnCreateRoomButtonClicked);
-
+        manager = FindAnyObjectByType<GameManager>();
         ConnectionManager.Instance.OnJoinRoom += UpdatePlayers;
         ConnectionManager.Instance.OnPlayerEnterRoom += UpdatePlayers;
         ConnectionManager.Instance.OnPlayerLeaveRoom += UpdatePlayers;
-
         /* ConnectionManager.Instance.JoinLobby();
            ConnectionManager.Instance.OnJoinRoom += HandleJoinedRoom;*/
     }
-
     void OnCreateRoomButtonClicked()
     {
         //   ConnectionManager.Instance.CreateRoom(roomNameInput.text);
-        PhotonNetwork.LoadLevel("Test");
+        if (PhotonNetwork.IsMasterClient)
+        {
+            manager.StartGame();
+            
+        }
         Debug.Log("<color=green>Botón tocado</color>");
     }
 
@@ -61,10 +59,10 @@ public class Lobby : MonoBehaviourPunCallbacks // cuando se "conecta" que te lle
         }
 
         int count = ConnectionManager.Instance.GetPlayersInRoom().Count;
-        createRoomButton.interactable = count >= 2 && count <= 4;
+        createRoomButton.interactable = count >= 1 && count <= 4;
 
     }
-    
+   
     
     public void SetUp(Player player) // la idea es que vaya recorriendo la lista de jugadores en la room y vaya poniendo el nombre de cada uno
     {

@@ -2,34 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using Photon;
 using Photon.Pun;
+using Photon.Realtime;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class GameManager : MonoBehaviourPunCallbacks
+public class GameManager : MonoBehaviourPun
 {
     [SerializeField] private PhotonView playerPrefab;
-    [SerializeField] private Vector3 spawnPoint;
-
+    [SerializeField] private Vector3[] spawnPoint;
     void Start()
     {
        // PhotonNetwork.JoinRandomOrCreateRoom();
     }
-    /*
-        public override void OnConnectedToMaster()
-        {
-            Debug.Log("OnConnectedToMaster");
-            PhotonNetwork.JoinRandomOrCreateRoom();
-            PhotonNetwork.LoadLevel("test");
-        }*/
-
-    public override void OnJoinedRoom() // cuando se une a la room
+    
+       
+    public void StartGame()
     {
-        GameObject player = PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint, quaternion.Euler(spawnPoint));
-        player.GetComponent<PhotonView>().RPC("RPC_SetPlayerName", RpcTarget.AllBuffered, PlayerPrefs.GetString("PlayerNickname")); // rpc para poner nombre al jugador
-
-      //  print(playerPrefab.ViewID);
-        print(PhotonNetwork.NickName);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            Debug.Log("true");
+            photonView.RPC("LoadScene", RpcTarget.AllBuffered);
+        }
+            
     }
+    [PunRPC]
+    void LoadScene()
+    {
+        PhotonNetwork.LoadLevel("test");
+        Dictionary<int, Player> players = ConnectionManager.Instance.GetPlayersInRoom();
+        Debug.Log("Players count" + players.Count);
+        int index = 0;
+
+        foreach (KeyValuePair<int, Player> player in players) // x cada jugador pongo el texto
+        {
+            PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint[index], Quaternion.identity);
+            index++;
+        }
+    }
+    
 
     // para cambiar de oleada se puede usar un rpc
 }
