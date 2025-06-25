@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        PhotonNetwork.JoinRandomOrCreateRoom();
+       // PhotonNetwork.JoinRandomOrCreateRoom();
     }
     /*
         public override void OnConnectedToMaster()
@@ -25,11 +25,11 @@ public class GameManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom() // cuando se une a la room
     {
         GameObject player = PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint, quaternion.Euler(spawnPoint));
-        player.GetComponent<PhotonView>().RPC("RPC_SetPlayerName", RpcTarget.AllBuffered, PlayerPrefs.GetString("PlayerNickname")); // rpc para poner nickname al jugador
+        player.GetComponent<PhotonView>().RPC("RPC_SetPlayerName", RpcTarget.AllBuffered, PlayerPrefs.GetString("PlayerNickname")); // rpc para poner nombre al jugador
 
       //  print(playerPrefab.ViewID);
         print(PhotonNetwork.NickName);
     }
 
-
+    // para cambiar de oleada se puede usar un rpc
 }
