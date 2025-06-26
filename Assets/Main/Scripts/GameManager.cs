@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviourPun
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            PhotonNetwork.LoadLevel("test");   
+            PhotonNetwork.LoadLevel("Nivel");   
         }
     }
 

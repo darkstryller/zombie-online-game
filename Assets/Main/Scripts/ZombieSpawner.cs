@@ -8,6 +8,7 @@ public class ZombieSpawner : MonoBehaviour
 {
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private GameObject zombiePrefab;
+    [SerializeField] private GameObject bossPrefab;
     [SerializeField] private float maxTime;
     [SerializeField] private float currentTime;
     [SerializeField] private int maxWaves;
@@ -50,5 +51,18 @@ public class ZombieSpawner : MonoBehaviour
         }
 
         waveCount++;
+
+        if (waveCount % 5 == 0)
+        {
+            SpawnBoss();
+        }
+    }
+
+    void SpawnBoss()
+    {
+        int randomIndex = UnityEngine.Random.Range(0, spawnPoints.Length);
+        Vector3 bossSpawnPos = spawnPoints[randomIndex].position;
+
+        PhotonNetwork.Instantiate("boss", bossSpawnPos, quaternion.identity);
     }
 }
