@@ -10,17 +10,12 @@ public class GameManager : MonoBehaviourPun
 {
     [SerializeField] private PhotonView playerPrefab;
     [SerializeField] private Vector3[] spawnPoint;
-
-    void Start()
-    {
-       // PhotonNetwork.JoinRandomOrCreateRoom();
-    }
     
-    public void StartGame()
+    public void StartGame() // si es el master carga el nivel
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            PhotonNetwork.LoadLevel("test");   // ► Esto sincroniza a todos
+            PhotonNetwork.LoadLevel("test");   
         }
     }
 
