@@ -8,12 +8,10 @@ public class IdleState<T> : State<T>
 {
     NavMeshAgent _agent;
     Action _action;
-    Action _changeTarget;
-    public IdleState(NavMeshAgent agent, Action coroutine, Action settarget) 
+    public IdleState(NavMeshAgent agent, Action coroutine) 
     {
         _agent = agent;
         _action = coroutine;
-        _changeTarget = settarget;
     }
     public override void Enter()
     {
@@ -21,9 +19,5 @@ public class IdleState<T> : State<T>
         _action.Invoke();
         Debug.Log("i'm idle");
     }
-    public override void Execute()
-    {
-        base.Execute();
-        _changeTarget.Invoke();
-    }
+  
 }
