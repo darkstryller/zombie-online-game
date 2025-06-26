@@ -13,7 +13,7 @@ public class ZombieController : MonoBehaviourPunCallbacks, IDamageable
     HealthScript health;
     [SerializeField] EnemyStats _stats;
     [SerializeField] GameObject _target;
-    [SerializeField]GameObject[] _allTargets;
+    [SerializeField] List<GameObject> _allTargets = new List<GameObject>();
     ZombieView _view;
 
     FSM<StateEnum> _fsm;
@@ -28,12 +28,18 @@ public class ZombieController : MonoBehaviourPunCallbacks, IDamageable
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
         health.maxHealth = _stats._health;
-        _allTargets = GameObject.FindGameObjectsWithTag("Player");
+        var palyer = GameObject.FindGameObjectsWithTag("Player");
+        Debug.Log("local var palye4r count: " + palyer.Length);
+        for (int i = 0; i < palyer.Length; i++)
+        {
+            _allTargets.Add(palyer[i]);
+        }
         
     }
     void Start()
     {
         ChangeTarget();
+        Debug.Log("player count: " + _allTargets.Count);
         _agent.speed = _stats._speed;
         InitializeFSM();
         InitializeTree();
@@ -41,13 +47,13 @@ public class ZombieController : MonoBehaviourPunCallbacks, IDamageable
     
     void Update()
     {
-        ChangeTarget();
         _fsm.OnExecute();
         _root.Execute();
         if (health._currentHealth <= 0)
         {
             Debug.Log("AAAAAAAAAA");
         }
+        
     }
 
     public void GetDamage(int damage)
@@ -58,9 +64,8 @@ public class ZombieController : MonoBehaviourPunCallbacks, IDamageable
     void InitializeFSM()
     {
         _fsm = new FSM<StateEnum>();
-
         var idle = new IdleState<StateEnum>(_agent, LostTarget);
-        var move = new MovementState<StateEnum>(transform, _target.transform, _agent, _view);
+        var move = new MovementState<StateEnum>(transform, _allTargets, _agent, _view);
         var dead = new deathState<StateEnum>(gameObject);
         var attack = new AttackState<StateEnum>(_view, _agent);
 
@@ -99,7 +104,7 @@ public class ZombieController : MonoBehaviourPunCallbacks, IDamageable
 
     bool questionHasSeenFoe()
     {
-        Debug.Log(_los.LOS(_target.transform));
+        //Debug.Log(_los.LOS(_target.transform));
         return _los.LOS(_target.transform);
         
     }
