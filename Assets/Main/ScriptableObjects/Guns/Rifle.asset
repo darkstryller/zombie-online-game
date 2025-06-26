@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6ca7c299f9152948a7ba5768b145681, type: 3}
   m_Name: Rifle
   m_EditorClassIdentifier: 
-  <_damage>k__BackingField: 5
+  <_damage>k__BackingField: 6
   <_range>k__BackingField: 8
   <_IsAutomatic>k__BackingField: 1
   <_fireFate>k__BackingField: 10
   <_clipAmmo>k__BackingField: 30
-  <_maxAmmo>k__BackingField: 120
+  <_maxAmmo>k__BackingField: 150
