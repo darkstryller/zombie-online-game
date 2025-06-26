@@ -35,7 +35,6 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     
     [Header("UI")]
     [SerializeField] private GameObject localHUD;
-    [SerializeField] private GameObject nameTag;
     [SerializeField] private TMP_Text playerNameText;
 
     #endregion
@@ -77,7 +76,6 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
 
             localHUD.SetActive(false);
         }
-        nameTag.SetActive(true);
     }
 
     void Update()
