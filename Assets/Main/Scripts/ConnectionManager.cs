@@ -16,7 +16,6 @@ public class ConnectionManager : MonoBehaviourPunCallbacks // conecta entre el j
 
     private List<RoomInfo> rooms = new List<RoomInfo>();
 
-
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -28,13 +27,15 @@ public class ConnectionManager : MonoBehaviourPunCallbacks // conecta entre el j
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
+        PhotonNetwork.AutomaticallySyncScene = true; // para que le cargue a todos los jugadores a la vez
     }
 
     void Start()
     {
         photonManager.Init(HandleJoinedRoom, HandleRoomCreated, HandleNewPlayerInRoom, HandlePlayerLeftRoom);
     }
-
+    #region Metodos
     public void SetNickName(string NickName)
     {
         photonManager.SetNickName(NickName);
@@ -71,8 +72,16 @@ public class ConnectionManager : MonoBehaviourPunCallbacks // conecta entre el j
         photonManager.JoinRoom(roomName);
     }
 
-    public void HandleNewPlayerInRoom() { OnPlayerEnterRoom?.Invoke(); }
-    public void HandlePlayerLeftRoom() { OnPlayerLeaveRoom?.Invoke(); }
+    public void HandleNewPlayerInRoom()
+    {
+        OnPlayerEnterRoom?.Invoke();
+    }
+
+    public void HandlePlayerLeftRoom()
+    {
+        OnPlayerLeaveRoom?.Invoke();
+    }
+
     public void CreateRoom(string roomName)
     {
         photonManager.CreateRoom(roomName);
@@ -98,8 +107,6 @@ public class ConnectionManager : MonoBehaviourPunCallbacks // conecta entre el j
     {
         return photonManager.GetPlayersInRoom();
     }
+    #endregion
 
-
-
-    
 }

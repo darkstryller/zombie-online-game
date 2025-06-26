@@ -33,11 +33,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5885589643986125957}
   - {fileID: 1290869838459856987}
   - {fileID: 5097886154632856411}
   - {fileID: 802325495505810125}
   - {fileID: 6588073260987975948}
-  - {fileID: 5885589643986125957}
   m_Father: {fileID: 724465270574702574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -860,7 +860,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5855954093143667808}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
   m_ConstrainProportionsScale: 1
@@ -1558,7 +1558,8 @@ MonoBehaviour:
   interactPoint: {fileID: 7870259376703249029}
   gunHolder: {fileID: 7229772136937072834}
   cameraFollow: {fileID: 0}
-  uiCanvas: {fileID: 8260476522810903657}
+  localHUD: {fileID: 8260476522810903657}
+  nameTag: {fileID: 5855954093143667808}
   playerNameText: {fileID: 9137254117891721605}
 --- !u!114 &84817972951477225
 MonoBehaviour:

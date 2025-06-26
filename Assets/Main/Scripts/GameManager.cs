@@ -10,12 +10,21 @@ public class GameManager : MonoBehaviourPun
 {
     [SerializeField] private PhotonView playerPrefab;
     [SerializeField] private Vector3[] spawnPoint;
+
     void Start()
     {
        // PhotonNetwork.JoinRandomOrCreateRoom();
     }
     
-       
+    public void StartGame()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.LoadLevel("test");   // ► Esto sincroniza a todos
+        }
+    }
+
+    /*
     public void StartGame()
     {
         if (PhotonNetwork.IsMasterClient)
@@ -23,8 +32,8 @@ public class GameManager : MonoBehaviourPun
             Debug.Log("true");
             photonView.RPC("LoadScene", RpcTarget.AllBuffered);
         }
-            
     }
+
     [PunRPC]
     void LoadScene()
     {
@@ -39,7 +48,6 @@ public class GameManager : MonoBehaviourPun
             index++;
         }
     }
-    
 
-    // para cambiar de oleada se puede usar un rpc
+    // para cambiar de oleada se puede usar un rpc*/
 }

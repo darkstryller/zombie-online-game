@@ -6,14 +6,14 @@ using TMPro;
 public class PlayerMovement : MonoBehaviourPunCallbacks
 {
     #region  Variables
-    [Header("Movimiento")]
+    [Header("Movment")]
     [Range(0, 10)]
     [SerializeField] private float movSpeed = 5f;
     private float horizontal;
     private float vertical;
     private Vector2 dir;
 
-    [Header("Esquive")]
+    [Header("Evade")]
     [Range(5, 10)]
     [SerializeField] private float evadeForce;
     private bool isEvading = false;
@@ -32,12 +32,17 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     [SerializeField] private CameraWork cameraFollow;
     private HealthScript health;
     private Camera mainCamera;
-    [SerializeField] private GameObject uiCanvas;
+    
+    [Header("UI")]
+    [SerializeField] private GameObject localHUD;
+    [SerializeField] private GameObject nameTag;
     [SerializeField] private TMP_Text playerNameText;
 
     #endregion
 
     #region Metodos
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -48,7 +53,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         if (photonView.IsMine)
         {
             cameraFollow = mainCamera.GetComponent<CameraWork>();
-            uiCanvas.SetActive(true);
+            localHUD.SetActive(true);
 
             if (cameraFollow != null)
             {
@@ -56,8 +61,10 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
             }
             else
             {
-                Debug.LogError("No se encontró el script CameraWork en la cámara principal.");
+                Debug.LogError("No esta el script CameraWork en la main camera.");
             }
+
+            photonView.RPC("RPC_SetPlayerName", RpcTarget.AllBuffered, PhotonNetwork.NickName); // llamo al rpc para setearle el nombre al player
         }
         else
         {
@@ -67,7 +74,10 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
             {
                 camera.gameObject.SetActive(false); // Desactiva la cámara del jugador remoto
             }
+
+            localHUD.SetActive(false);
         }
+        nameTag.SetActive(true);
     }
 
     void Update()
@@ -201,7 +211,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
             }
         }
     }
-    
+   
     [PunRPC]
     public void RPC_SetPlayerName(string playerName)
     {
