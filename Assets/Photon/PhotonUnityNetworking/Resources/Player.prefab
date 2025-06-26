@@ -1029,8 +1029,6 @@ GameObject:
   - component: {fileID: 3077124479063747008}
   - component: {fileID: 8420228340958568888}
   - component: {fileID: 6710311137617263847}
-  - component: {fileID: 7725237547847449761}
-  - component: {fileID: 561767886017866224}
   m_Layer: 5
   m_Name: NameCanvas
   m_TagString: Untagged
@@ -1051,7 +1049,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7039351461039011764}
-  m_Father: {fileID: 724465270574702574}
+  m_Father: {fileID: 8580369897108245789}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1121,34 +1119,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &7725237547847449761
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6588763335687003753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dc0a5ff24bfd1b458f5821351c12c9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bar: {fileID: 0}
-  player: {fileID: 5362490943719637176}
---- !u!114 &561767886017866224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6588763335687003753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45bdd5f5ef15acc4bad7a68bd0e661bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bar: {fileID: 0}
-  health: {fileID: 84817972951477225}
 --- !u!1 &7023658882706956935
 GameObject:
   m_ObjectHideFlags: 0
@@ -1254,7 +1224,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3440980939338557934}
-  - {fileID: 584795482322472398}
   - {fileID: 4217762006274947259}
   m_Father: {fileID: 8580369897108245789}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1483,6 +1452,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 584795482322472398}
   - {fileID: 724465270574702574}
   - {fileID: 7870259376703249029}
   - {fileID: 5974693643261417820}
@@ -1691,7 +1661,6 @@ MonoBehaviour:
   gunHolder: {fileID: 7229772136937072834}
   cameraFollow: {fileID: 0}
   localHUD: {fileID: 8260476522810903657}
-  nameTag: {fileID: 4275914521371343781}
   playerNameText: {fileID: 7493352220643332536}
 --- !u!114 &84817972951477225
 MonoBehaviour:
