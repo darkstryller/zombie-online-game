@@ -67,7 +67,7 @@ public class ZombieController : MonoBehaviourPunCallbacks, IDamageable
         var idle = new IdleState<StateEnum>(_agent, LostTarget);
         var move = new MovementState<StateEnum>(transform, _allTargets, _agent, _view);
         var dead = new deathState<StateEnum>(gameObject);
-        var attack = new AttackState<StateEnum>(_view, _agent);
+        var attack = new AttackState<StateEnum>(_view, _agent, ChangeTarget);
 
         idle.AddTransition(StateEnum.MOVE, move);
         idle.AddTransition(StateEnum.DEATH, dead);
@@ -152,7 +152,7 @@ public class ZombieController : MonoBehaviourPunCallbacks, IDamageable
 
     }
 
-    void ChangeTarget()
+    public void ChangeTarget()
     {
         float mindist = Mathf.Infinity;
         foreach (GameObject item in _allTargets)
