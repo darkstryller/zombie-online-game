@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Photon;
 using Photon.Pun;
 using Unity.Mathematics;
-using UnityEditor.SearchService;
 using UnityEngine;
 
 public class GameManager : MonoBehaviourPunCallbacks

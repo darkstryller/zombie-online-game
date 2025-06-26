@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Photon.Pun;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using Unity.Mathematics;
 
 public class ZombieController : MonoBehaviourPunCallbacks, IDamageable
 {
@@ -12,6 +13,7 @@ public class ZombieController : MonoBehaviourPunCallbacks, IDamageable
     HealthScript health;
     [SerializeField] EnemyStats _stats;
     [SerializeField] GameObject _target;
+    [SerializeField]GameObject[] _allTargets;
     ZombieView _view;
 
     FSM<StateEnum> _fsm;
@@ -26,12 +28,12 @@ public class ZombieController : MonoBehaviourPunCallbacks, IDamageable
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
         health.maxHealth = _stats._health;
-        
+        _allTargets = GameObject.FindGameObjectsWithTag("Player");
         
     }
     void Start()
     {
-        _target = FindAnyObjectByType<PlayerMovement>().gameObject;
+        ChangeTarget();
         _agent.speed = _stats._speed;
         InitializeFSM();
         InitializeTree();
@@ -39,6 +41,7 @@ public class ZombieController : MonoBehaviourPunCallbacks, IDamageable
     
     void Update()
     {
+        ChangeTarget();
         _fsm.OnExecute();
         _root.Execute();
         if (health._currentHealth <= 0)
@@ -142,5 +145,20 @@ public class ZombieController : MonoBehaviourPunCallbacks, IDamageable
             yield return new WaitForSeconds(stepTime);
         }
 
+    }
+
+    void ChangeTarget()
+    {
+        float mindist = Mathf.Infinity;
+        foreach (GameObject item in _allTargets)
+        {
+            float dist = Vector2.Distance(transform.position, item.transform.position);
+            if (dist < mindist) 
+            {
+                mindist = dist;
+                _target = item;
+            }
+        }
+        Debug.Log("target: " + _target);
     }
 }

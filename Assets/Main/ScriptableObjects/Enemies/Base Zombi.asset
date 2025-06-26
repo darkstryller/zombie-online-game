@@ -21,3 +21,4 @@ MonoBehaviour:
     m_Bits: 64
   <_attackDistance>k__BackingField: 4.5
   <_attackDuration>k__BackingField: 1
+  <_minAttackRange>k__BackingField: 2.5
