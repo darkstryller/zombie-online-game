@@ -814,7 +814,7 @@ MonoBehaviour:
   zombiePrefab: {fileID: 2643109736072550674, guid: 521312be30ea4474b83d7edcc15a7111, type: 3}
   maxTime: 10
   currentTime: 0
-  maxWaves: 1
+  maxWaves: 4
   waveCount: 0
 --- !u!4 &705134183
 Transform:
@@ -1844,6 +1844,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1359747421}
   - component: {fileID: 1359747420}
+  - component: {fileID: 1359747422}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1864,7 +1865,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 556956442942914073, guid: ca3db3198d2843245a55855f9d15de6e, type: 3}
-  spawnPoint: {x: 0, y: 0, z: 0}
+  spawnPoint:
+  - {x: 1.3235939e+22, y: 0.00016899177, z: 0.000042531843}
 --- !u!4 &1359747421
 Transform:
   m_ObjectHideFlags: 0
@@ -1880,6 +1882,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1359747422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359747419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e104748f6f7a3044bb16471b4041fa78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 556956442942914073, guid: ca3db3198d2843245a55855f9d15de6e, type: 3}
+  spawnPoints:
+  - {fileID: 1144197161}
+  - {fileID: 45767615}
+  - {fileID: 1618481259}
+  - {fileID: 347232217}
 --- !u!1 &1426241945
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,18 +1,19 @@
 using System.Collections;
 using UnityEngine;
 using Photon.Pun;
+using TMPro;
 
 public class PlayerMovement : MonoBehaviourPunCallbacks
 {
     #region  Variables
-    [Header("Movimiento")]
+    [Header("Movment")]
     [Range(0, 10)]
     [SerializeField] private float movSpeed = 5f;
     private float horizontal;
     private float vertical;
     private Vector2 dir;
 
-    [Header("Esquive")]
+    [Header("Evade")]
     [Range(5, 10)]
     [SerializeField] private float evadeForce;
     private bool isEvading = false;
@@ -20,7 +21,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     private int currentEvades;  // Cargas disponibles
     private float evadeDuration = 0.2f;
     [SerializeField] private float evadeCooldown = 2f; // Tiempo de cooldown por carga de esquive
-    
+
     private Vector2 mousePos;
     private Rigidbody2D rb;
 
@@ -31,42 +32,53 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     [SerializeField] private CameraWork cameraFollow;
     private HealthScript health;
     private Camera mainCamera;
-    [SerializeField] private GameObject uiCanvas;
+    
+    [Header("UI")]
+    [SerializeField] private GameObject localHUD;
+    [SerializeField] private GameObject nameTag;
+    [SerializeField] private TMP_Text playerNameText;
 
-#endregion
+    #endregion
 
-#region Metodos
-void Start()
-{
-    rb = GetComponent<Rigidbody2D>();
-    health = GetComponent<HealthScript>();
-    currentEvades = maxEvades;
-    mainCamera = Camera.main;
+    #region Metodos
 
-    if (photonView.IsMine) 
+
+    void Start()
     {
-        cameraFollow = mainCamera.GetComponent<CameraWork>();
-        uiCanvas.SetActive(true);
+        rb = GetComponent<Rigidbody2D>();
+        health = GetComponent<HealthScript>();
+        currentEvades = maxEvades;
+        mainCamera = Camera.main;
 
-        if (cameraFollow != null)
+        if (photonView.IsMine)
         {
-            cameraFollow.SetPlayer(transform);  // Asigna la cámara para el jugador local
+            cameraFollow = mainCamera.GetComponent<CameraWork>();
+            localHUD.SetActive(true);
+
+            if (cameraFollow != null)
+            {
+                cameraFollow.SetPlayer(transform);  // Asigna la cámara para el jugador local
+            }
+            else
+            {
+                Debug.LogError("No esta el script CameraWork en la main camera.");
+            }
+
+            photonView.RPC("RPC_SetPlayerName", RpcTarget.AllBuffered, PhotonNetwork.NickName); // llamo al rpc para setearle el nombre al player
         }
         else
         {
-            Debug.LogError("No se encontró el script CameraWork en la cámara principal.");
-        }
-    }
-    else
-    {
-        Camera camera = GetComponentInChildren<Camera>();
+            Camera camera = GetComponentInChildren<Camera>();
 
-        if (camera != null)
-        {
-            camera.gameObject.SetActive(false); // Desactiva la cámara del jugador remoto
+            if (camera != null)
+            {
+                camera.gameObject.SetActive(false); // Desactiva la cámara del jugador remoto
+            }
+
+            localHUD.SetActive(false);
         }
+        nameTag.SetActive(true);
     }
-}
 
     void Update()
     {
@@ -88,7 +100,7 @@ void Start()
             {
                 ONInteract();
             }
-            
+
             ChangeGuns();
 
             if (Input.GetKeyDown(KeyCode.F))
@@ -99,6 +111,7 @@ void Start()
 
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+         //     PhotonNetwork.Disconnect();
                 Application.Quit();
             }
         }
@@ -106,13 +119,13 @@ void Start()
 
     void FixedUpdate()
     {
-       if (photonView.IsMine)
+        if (photonView.IsMine)
         {
             if (isEvading)
             {
                 return;
             }
-            
+
             Move();
         }
         
@@ -128,14 +141,14 @@ void Start()
         if (rb.velocity != Vector2.zero)
         {
             isEvading = true;
-            currentEvades--;  
+            currentEvades--;
             rb.velocity = Vector2.zero;
             rb.AddForce(dir.normalized * evadeForce, ForceMode2D.Impulse);
 
             StartCoroutine(EndEvade());
             StartCoroutine(ReloadEvade());
         }
-        
+
     }
 
     void ChangeGuns()
@@ -168,7 +181,7 @@ void Start()
 
     public float GetevadeTime()
     {
-        return(float) currentEvades / maxEvades;
+        return (float)currentEvades / maxEvades;
     }
 
     void Look()
@@ -188,7 +201,7 @@ void Start()
 
     private void ONInteract()
     {
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(interactPoint.position, new Vector2(1f, 1f), 0f, interactableLayer); 
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(interactPoint.position, new Vector2(1f, 1f), 0f, interactableLayer);
 
         foreach (Collider2D items in colliders)
         {
@@ -197,7 +210,13 @@ void Start()
                 interactable.Interact();
                 Debug.Log("Toque: " + "<color=green>" + " " + interactable + "</color>");
             }
-        }      
+        }
+    }
+   
+    [PunRPC]
+    public void RPC_SetPlayerName(string playerName)
+    {
+        playerNameText.text = playerName;
     }
 
     #endregion
