@@ -1219,7 +1219,7 @@ MonoBehaviour:
   bossPrefab: {fileID: 2643109736072550674, guid: 1f57b8eda4772be45b23e0d88a5cb389, type: 3}
   maxTime: 10
   currentTime: 0
-  maxWaves: 15
+  maxWaves: 5
   waveCount: 0
 --- !u!4 &705134183
 Transform:

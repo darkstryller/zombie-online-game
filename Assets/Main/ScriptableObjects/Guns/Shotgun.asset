@@ -16,5 +16,5 @@ MonoBehaviour:
   <_range>k__BackingField: 5
   <_IsAutomatic>k__BackingField: 0
   <_fireFate>k__BackingField: 1
-  <_clipAmmo>k__BackingField: 5
-  <_maxAmmo>k__BackingField: 20
+  <_clipAmmo>k__BackingField: 6
+  <_maxAmmo>k__BackingField: 30
