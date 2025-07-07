@@ -17,6 +17,7 @@ public class Lobby : MonoBehaviourPunCallbacks
     {
         createRoomButton.onClick.AddListener(OnCreateRoomButtonClicked);
         manager = FindAnyObjectByType<GameManager>();
+        EmptyTexts();
 
         ConnectionManager.Instance.OnJoinRoom += UpdatePlayers;
         ConnectionManager.Instance.OnPlayerEnterRoom += UpdatePlayers;
@@ -28,7 +29,6 @@ public class Lobby : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient)
         {
             manager.StartGame();
-
         }
 
         Debug.Log("<color=green>Botón tocado</color>");
@@ -49,6 +49,14 @@ public class Lobby : MonoBehaviourPunCallbacks
         int count = ConnectionManager.Instance.GetPlayersInRoom().Count;
         createRoomButton.interactable = count >= 2 && count <= 4;
 
+    }
+
+    void EmptyTexts()
+    {
+        for (int i = 0; i < playerNickNameTexts.Length; i++)
+        {
+            playerNickNameTexts[i].text = "";
+        }
     }
 
     void OnDestroy() // desuscribiendose para que cuando un jugador salga de la partida no siga llamando a los eventos y re rompa todo
