@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 
-public class GunHolderScript : MonoBehaviour
+public class GunHolderScript : MonoBehaviourPun
 {
     [SerializeField] GameObject[] guns;
-
+    
     public void ChangeGun(int id)
     {
         for (int i = 0; i < guns.Length; i++)
@@ -15,7 +15,6 @@ public class GunHolderScript : MonoBehaviour
             if (guns[i] != null)
             {
                 guns[i].SetActive(i == id);
-                Debug.Log("Gun id: " + " " + id);
             }
         }
     }

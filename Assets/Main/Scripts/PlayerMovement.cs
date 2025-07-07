@@ -153,11 +153,11 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            gunHolder.ChangeGun(0);
+            photonView.RPC("RPC_ChangeGun", RpcTarget.All, 0);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            gunHolder.ChangeGun(1);
+           photonView.RPC("RPC_ChangeGun", RpcTarget.All, 1);
         }
     }
 

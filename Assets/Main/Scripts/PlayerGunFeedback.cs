@@ -29,4 +29,10 @@ public class PlayerGunFeedback : MonoBehaviour // este script es para que se pue
         }
     }
 
+    [PunRPC]
+    public void RPC_ChangeGun(int id)
+    {
+        gunHolder.ChangeGun(id);
+    }
+
 }
