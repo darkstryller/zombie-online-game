@@ -32,7 +32,7 @@ public class GunHolderScript : MonoBehaviour
         }
     }
 
-    public Gun GetActiveGun()
+    public Gun GetActiveGun() // recorro el array para saber cual esta activa y devuelvo el componente gun
     {
         foreach (var gun in guns)
         {

@@ -115,7 +115,7 @@ public class Gun : MonoBehaviourPunCallbacks, IGun
             StartCoroutine(MuzzleFlashRoutine());
 
             // RPCs para que los demas lo reciban y puedan escuchar y ver
-            photonView.RPC("RPC_PlayShootSound", RpcTarget.Others); // others para que lo vean los demas
+            photonView.RPC("RPC_PlayShootSound", RpcTarget.Others); // others para que lo vean los demas, no yo (local)
             photonView.RPC("RPC_ShowMuzzleFlash", RpcTarget.Others);
 
         }
@@ -153,7 +153,7 @@ public class Gun : MonoBehaviourPunCallbacks, IGun
     IEnumerator MuzzleFlashRoutine()
     {
         muzzleFlash.SetActive(true);
-        yield return new WaitForSeconds(0.05f);   // duración
+        yield return new WaitForSeconds(0.05f);   // prendo el flash pasa el tiempo y lo apago 
         muzzleFlash.SetActive(false);
     }
 
