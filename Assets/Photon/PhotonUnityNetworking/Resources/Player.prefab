@@ -1800,7 +1800,7 @@ GameObject:
   - component: {fileID: 6907369757501335357}
   - component: {fileID: 5362490943719637176}
   - component: {fileID: 84817972951477225}
-  - component: {fileID: 3577994098078326347}
+  - component: {fileID: 2250702761641653242}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -2045,7 +2045,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
---- !u!114 &3577994098078326347
+--- !u!114 &2250702761641653242
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2054,7 +2054,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8869895996242752674}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3822bdb4219e3cf47855d123b6e002a9, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d99364e38a5f7244a3bea1b06982bf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gunHolder: {fileID: 7229772136937072834}
