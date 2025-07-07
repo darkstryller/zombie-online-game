@@ -18,3 +18,4 @@ MonoBehaviour:
   <_fireFate>k__BackingField: 1
   <_clipAmmo>k__BackingField: 6
   <_maxAmmo>k__BackingField: 30
+  <_shootSound>k__BackingField: {fileID: 8300000, guid: e670893b02f72a1498d66993cdee2c60, type: 3}

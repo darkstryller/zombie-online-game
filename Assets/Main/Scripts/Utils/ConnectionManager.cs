@@ -35,6 +35,7 @@ public class ConnectionManager : MonoBehaviourPunCallbacks // conecta entre el j
     {
         photonManager.Init(HandleJoinedRoom, HandleRoomCreated, HandleNewPlayerInRoom, HandlePlayerLeftRoom);
     }
+    
     #region Metodos
     public void SetNickName(string NickName)
     {

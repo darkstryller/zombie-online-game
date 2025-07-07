@@ -14,7 +14,7 @@ public class GunHolderScript : MonoBehaviour
         {
             if (guns[i] != null)
             {
-                guns[i].SetActive(i == id); 
+                guns[i].SetActive(i == id);
                 Debug.Log("Gun id: " + " " + id);
             }
         }
@@ -31,4 +31,17 @@ public class GunHolderScript : MonoBehaviour
             }
         }
     }
+
+    public Gun GetActiveGun()
+    {
+        foreach (var gun in guns)
+        {
+            if (gun.activeInHierarchy)
+            {
+                return gun.GetComponent<Gun>();
+            }
+        }
+        return null;
+    }
+
 }

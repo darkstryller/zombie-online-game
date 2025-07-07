@@ -15,6 +15,8 @@ public class Gun : MonoBehaviourPunCallbacks, IGun
     [SerializeField] private Text ammoCount;
     [SerializeField] private Text maxAmmoCount;
     [SerializeField] private LayerMask zombieMask;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private GameObject muzzleFlash;
 
     private Vector2 mousePos;
     private Vector2 startPos;
@@ -26,12 +28,12 @@ public class Gun : MonoBehaviourPunCallbacks, IGun
     private bool IsReloading;
     private bool isShooting;
     private float nextFireTime;
-#endregion
+    #endregion
 
-#region Metodos de Unity
+    #region Metodos de Unity
     void Start()
     {
-       // market = FindObjectOfType<MarketScript>();
+        // market = FindObjectOfType<MarketScript>();
         ammoClip = gunData._clipAmmo;
         currentAmmo = ammoClip;
         maxAmmo = gunData._maxAmmo;
@@ -73,29 +75,29 @@ public class Gun : MonoBehaviourPunCallbacks, IGun
     }
     #endregion
 
-#region Metodos
-   
+    #region Metodos
+
     public void Shoot()
     {
         if (/*market != null && !market._IsShooping &&*/ !IsReloading)  // las comprobaciones comentadas son por el mercado 
         {
             currentAmmo--;
             shotsFired++;
-    
+
             // Calculo entre el punto de disparo y la posición del mouse
             Vector2 direction = (mousePos - startPos).normalized;
-    
+
             // distancia entre el punto de disparo y el mouse
             float distanceToMouse = Vector2.Distance(startPos, mousePos);
-    
+
             // Limito la distancia del raycast al rango del arma
             float range = Mathf.Min(distanceToMouse, gunData._range);
-           
+
             RaycastHit2D hit = Physics2D.Raycast(startPos, direction, range, zombieMask);
-    
+
             // se dibuja la linea hasta el rango del arma
             Debug.DrawLine(startPos, startPos + direction * range, Color.red, 0.1f);
-    
+
             // Solo aplica daño si el raycast golpea algo dentro del rango
             if (hit.collider != null && hit.distance <= range)
             {
@@ -107,6 +109,15 @@ public class Gun : MonoBehaviourPunCallbacks, IGun
                     Debug.Log("<color=yellow>" + damageable + "</color>" + " Se comió " + "<color=yellow>" + gunData._damage + "</color>" + " de daño");
                 }
             }
+
+            // estos de aca son los locales para evitar el delay del server
+            PlayShootSound();
+            StartCoroutine(MuzzleFlashRoutine());
+
+            // RPCs para que los demas lo reciban y puedan escuchar y ver
+            photonView.RPC("RPC_PlayShootSound", RpcTarget.Others); // others para que lo vean los demas
+            photonView.RPC("RPC_ShowMuzzleFlash", RpcTarget.Others);
+
         }
     }
 
@@ -116,16 +127,16 @@ public class Gun : MonoBehaviourPunCallbacks, IGun
         {
             return; // No recarga si ya está recargando, no hay balas, o el cargador está lleno
         }
-        
+
         IsReloading = true;
-    
+
         int ammoNeeded = ammoClip - currentAmmo; // Cuántas balas faltan para llenar el cargador
         int ammoToLoad = Mathf.Min(ammoNeeded, maxAmmo); // Carga solo lo que haya disponible
 
         currentAmmo += ammoToLoad; // añade las balas al cargador y resta de la reserva
-        maxAmmo -= ammoToLoad; 
+        maxAmmo -= ammoToLoad;
 
-        IsReloading = false; 
+        IsReloading = false;
     }
 
     public void GetAmmo()
@@ -138,6 +149,23 @@ public class Gun : MonoBehaviourPunCallbacks, IGun
         currentAmmo = gunData._clipAmmo;
         maxAmmo = gunData._maxAmmo;
     }
-   
+
+    IEnumerator MuzzleFlashRoutine()
+    {
+        muzzleFlash.SetActive(true);
+        yield return new WaitForSeconds(0.05f);   // duración
+        muzzleFlash.SetActive(false);
+    }
+
+    public void ShowFlash()
+    {
+        StartCoroutine(MuzzleFlashRoutine());
+    }
+
+    public void PlayShootSound()
+    {
+        audioSource.PlayOneShot(gunData._shootSound);
+    }
     #endregion
+    
 }
