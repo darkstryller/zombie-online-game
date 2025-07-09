@@ -16,7 +16,7 @@ MonoBehaviour:
     AppIdRealtime: ee637933-97ea-40f1-a975-3fcda9090998
     AppIdFusion: 
     AppIdChat: 
-    AppIdVoice: 
+    AppIdVoice: ee637933-97ea-40f1-a975-3fcda9090998
     AppVersion: 
     UseNameServer: 1
     FixedRegion: 
@@ -44,5 +44,5 @@ MonoBehaviour:
   - OnCreateRoomButtonClicked
   - LoadScene
   DisableAutoOpenWizard: 1
-  ShowSettings: 0
+  ShowSettings: 1
   DevRegionSetOnce: 1
