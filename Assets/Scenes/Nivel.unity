@@ -409,8 +409,8 @@ MonoBehaviour:
   ApplyDontDestroyOnLoad: 1
   runInBackground: 1
   statsResetInterval: 1000
-  speakerPrefab: {fileID: 0}
-  primaryRecorder: {fileID: 0}
+  speakerPrefab: {fileID: 8869895996242752674, guid: ca3db3198d2843245a55855f9d15de6e, type: 3}
+  primaryRecorder: {fileID: 770584775}
   usePrimaryRecorder: 0
   cppCompatibilityMode: 0
   Settings:
@@ -1763,7 +1763,7 @@ MonoBehaviour:
   sourceType: 0
   microphoneType: 1
   audioClip: {fileID: 0}
-  loopAudioClip: 1
+  loopAudioClip: 0
   recordingEnabled: 1
   audioSessionParameters:
     Category: 4
