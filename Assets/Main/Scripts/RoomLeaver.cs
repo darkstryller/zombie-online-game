@@ -29,6 +29,8 @@ public class RoomLeaver : MonoBehaviourPunCallbacks
     public override void OnLeftRoom()
     {
         Debug.Log("cargando el menu");
+        PhotonNetwork.AutomaticallySyncScene = false;
+        PhotonNetwork.IsMessageQueueRunning = false;
         SceneManager.LoadScene("menu");
     }
 }
