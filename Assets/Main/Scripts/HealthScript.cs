@@ -29,6 +29,7 @@ public class HealthScript : MonoBehaviourPun
 
         currentHealth = Mathf.Max(currentHealth - damage, 0); // x si acaso me aseguro que la vida nunca sea negativa (osea no baje de 0)
         photonView.RPC(nameof(RPC_UpdateHealth), RpcTarget.All, currentHealth, maxHealth);
+        Debug.Log("took damage");
     }
 
     public void ResetHealth() // metodo x si quiero reiniciar la vida
