@@ -1,45 +1,42 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
-public class HealthScript : MonoBehaviour
+[RequireComponent(typeof(PhotonView))] // me aseguro que el objeto tenga el photon view
+public class HealthScript : MonoBehaviourPun
 {
-#region  Variables
-    public int maxHealth;
-    public int _currentHealth => currentHealth;   
-    [SerializeField] private int currentHealth;
+    [Header("Health")]
+    public int maxHealth = 100;
 
-#endregion
+    [SerializeField] private int currentHealth;
+    public int CurrentHealth => currentHealth;
+
+    public event Action<int, int> OnHealthChanged;
 
     void Start()
     {
         currentHealth = maxHealth;
-    }
 
-    public void UpdateHealth() 
-    {
-        maxHealth = currentHealth;
+        if (photonView.IsMine) // solo el dueño le manda a todos para actualizar su vida
+        {
+            photonView.RPC(nameof(RPC_UpdateHealth), RpcTarget.All, currentHealth, maxHealth);
+        }
     }
-
+   
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
+        if (!photonView.IsMine) return;  // si no esta sincronizado corta aca
+
+        currentHealth = Mathf.Max(currentHealth - damage, 0); // x si acaso me aseguro que la vida nunca sea negativa (osea no baje de 0)
+        photonView.RPC(nameof(RPC_UpdateHealth), RpcTarget.All, currentHealth, maxHealth);
     }
 
-    public int GetCurrentHealth()
+    public void ResetHealth() // metodo x si quiero reiniciar la vida
     {
-        return currentHealth;
-    }
+        if (!photonView.IsMine) return;
 
-    public void Heal(int heal)
-    {
-        currentHealth += heal;
-
-        if (currentHealth >= maxHealth)
-        {
-            currentHealth = maxHealth;
-        }
+        currentHealth = maxHealth;
+        photonView.RPC(nameof(RPC_UpdateHealth), RpcTarget.AllBuffered, currentHealth, maxHealth);
     }
 
     public bool IsAlive()
@@ -47,8 +44,11 @@ public class HealthScript : MonoBehaviour
         return currentHealth > 0;
     }
 
-    public void ResetHealth()
+    [PunRPC] // rpc para actualizar la vida con evento
+    void RPC_UpdateHealth(int newCurrent, int newMax)
     {
-        currentHealth = maxHealth;
+        currentHealth = newCurrent;
+        maxHealth = newMax;
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
 }

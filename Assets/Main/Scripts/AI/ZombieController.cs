@@ -19,6 +19,7 @@ public class ZombieController : MonoBehaviourPunCallbacks, IDamageable
     FSM<StateEnum> _fsm;
     ITreeNode _root;
     Coroutine _searchTarget;
+    
     void Awake()
     {
         _view = GetComponent<ZombieView>();
@@ -29,36 +30,38 @@ public class ZombieController : MonoBehaviourPunCallbacks, IDamageable
         _agent.updateUpAxis = false;
         health.maxHealth = _stats._health;
         var palyer = GameObject.FindGameObjectsWithTag("Player");
+
         Debug.Log("local var palye4r count: " + palyer.Length);
+
         for (int i = 0; i < palyer.Length; i++)
         {
             _allTargets.Add(palyer[i]);
         }
-        
     }
     void Start()
     {
+        if (!photonView.IsMine) return;     // solo el dueño corre la lógica
+
         ChangeTarget();
         Debug.Log("player count: " + _allTargets.Count);
         _agent.speed = _stats._speed;
         InitializeFSM();
         InitializeTree();
     }
-    
+
     void Update()
     {
+        if (!photonView.IsMine) return;     // solo el dueño corre la lógica
+
         _fsm.OnExecute();
         _root.Execute();
-        if (health._currentHealth <= 0)
-        {
-            Debug.Log("AAAAAAAAAA");
-        }
-        
+
     }
 
     public void GetDamage(int damage)
     {
         health.TakeDamage(damage);
+        CheckDeath();
     }
 
     void InitializeFSM()
@@ -106,15 +109,14 @@ public class ZombieController : MonoBehaviourPunCallbacks, IDamageable
     {
         //Debug.Log(_los.LOS(_target.transform));
         return _los.LOS(_target.transform);
-        
     }
 
     bool questionIsOnAttackRange()
     {
         var los = _los;
         float range = _stats._minAttackRange;
-        if(los.CheckRange(_target.transform, range))
-        return true;
+        if (los.CheckRange(_target.transform, range))
+            return true;
         else return false;
     }
 
@@ -130,11 +132,13 @@ public class ZombieController : MonoBehaviourPunCallbacks, IDamageable
         _agent.SetDestination(transform.position);
         _view.Walk(0);
     }
+
     void DashAttack()
     {
         StartCoroutine(DashAttackCoroutine());
 
     }
+
     IEnumerator DashAttackCoroutine()
     {
         int steps = 10;
@@ -142,10 +146,10 @@ public class ZombieController : MonoBehaviourPunCallbacks, IDamageable
         float stepDistance = _stats._attackDistance / steps;
 
         Vector2 direction = _target.transform.position - transform.position;
-        
+
         for (int i = 0; i < steps; i++)
         {
-            
+
             transform.Translate(direction.normalized * stepDistance);
             yield return new WaitForSeconds(stepTime);
         }
@@ -158,7 +162,7 @@ public class ZombieController : MonoBehaviourPunCallbacks, IDamageable
         foreach (GameObject item in _allTargets)
         {
             float dist = Vector2.Distance(transform.position, item.transform.position);
-            if (dist < mindist) 
+            if (dist < mindist)
             {
                 mindist = dist;
                 _target = item;
@@ -166,4 +170,29 @@ public class ZombieController : MonoBehaviourPunCallbacks, IDamageable
         }
         Debug.Log("target: " + _target);
     }
+
+    void CheckDeath()
+    {
+        if (health.CurrentHealth > 0) return; // si no murio no hagas nada
+
+        if (PhotonNetwork.IsMasterClient) // si es el master client destruyo al zombi y aviso al metodo del zombiespawner
+        {
+            PhotonNetwork.Destroy(gameObject);
+            FindObjectOfType<ZombieSpawner>().OnZombieDied(photonView.ViewID);
+        }
+        else // si el que lo mata no es el master llamo al rpc para que este se encarge de matarlo
+        {
+            photonView.RPC(nameof(RPC_RequestDeath), RpcTarget.MasterClient);
+        }
+    }
+
+
+    [PunRPC]
+    void RPC_RequestDeath() // solo el master puede "matar" a los zombies
+    {
+        if (!PhotonNetwork.IsMasterClient) return;
+        CheckDeath();
+    }
+
+
 }

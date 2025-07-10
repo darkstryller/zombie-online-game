@@ -46,6 +46,13 @@ MonoBehaviour:
   - RPC_ShowMuzzleFlash
   - RPC_PlayShootSound
   - RPC_ChangeGun
+  - RPC_AskDamage
+  - RPC_NotifyWaveStart
+  - RPC_RequestDeath
+  - RPC_SetAliveUI
+  - RPC_SetWaveUI
+  - RPC_UpdateHealth
+  - RPC_MakeDamage
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

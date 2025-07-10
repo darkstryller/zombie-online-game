@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoxScript : MonoBehaviour, IDamageable
-{
+public class BoxScript : MonoBehaviour
+{/*
     private HealthScript health;
 
     void Start()
@@ -23,5 +23,5 @@ public class BoxScript : MonoBehaviour, IDamageable
     {
         health.TakeDamage(damage);
     }
-
+*/
 }

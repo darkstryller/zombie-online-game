@@ -52,7 +52,7 @@ public class Gun : MonoBehaviourPunCallbacks, IGun
             {
                 if (Input.GetKey(KeyCode.Mouse0) && Time.time >= nextFireTime && currentAmmo > 0)
                 {
-                    nextFireTime = Time.time + 1f / gunData._fireFate;
+                    nextFireTime = Time.time + 1f / gunData._fireFate; // limito la velocidad de disparo
                     Shoot();
                 }
             }
@@ -76,49 +76,36 @@ public class Gun : MonoBehaviourPunCallbacks, IGun
     #endregion
 
     #region Metodos
-
     public void Shoot()
     {
-        if (/*market != null && !market._IsShooping &&*/ !IsReloading)  // las comprobaciones comentadas son por el mercado 
+        if (IsReloading) return;
+        currentAmmo--;
+
+        Vector2 dir = ((Vector2)mousePos - (Vector2)startPos).normalized;
+        float range = Mathf.Min(Vector2.Distance(startPos, mousePos), gunData._range);
+
+        RaycastHit2D hit = Physics2D.Raycast(startPos, dir, range, zombieMask);
+
+        if (hit.collider && hit.distance <= range) // si le pego a un collider y esta dentro del rango.....
         {
-            currentAmmo--;
-            shotsFired++;
+            PhotonView targetPhotonView = hit.collider.GetComponent<PhotonView>(); // si le pegue a un objecto que tiene el photonview
+            PhotonView playerPhotonView = transform.root.GetComponent<PhotonView>(); // busco el photon view del padre (en este caso el jugador xq las armas son hijos)
 
-            // Calculo entre el punto de disparo y la posición del mouse
-            Vector2 direction = (mousePos - startPos).normalized;
-
-            // distancia entre el punto de disparo y el mouse
-            float distanceToMouse = Vector2.Distance(startPos, mousePos);
-
-            // Limito la distancia del raycast al rango del arma
-            float range = Mathf.Min(distanceToMouse, gunData._range);
-
-            RaycastHit2D hit = Physics2D.Raycast(startPos, direction, range, zombieMask);
-
-            // se dibuja la linea hasta el rango del arma
-            Debug.DrawLine(startPos, startPos + direction * range, Color.red, 0.1f);
-
-            // Solo aplica daño si el raycast golpea algo dentro del rango
-            if (hit.collider != null && hit.distance <= range)
+            if (targetPhotonView && playerPhotonView) // si encontre el view del objetivo, en este caso zombie y el del padre (el jugador)
             {
-                IDamageable damageable = hit.collider.GetComponent<IDamageable>();
-
-                if (damageable != null)
-                {
-                    damageable.GetDamage(gunData._damage);
-                    Debug.Log("<color=yellow>" + damageable + "</color>" + " Se comió " + "<color=yellow>" + gunData._damage + "</color>" + " de daño");
-                }
+                playerPhotonView.RPC(nameof(PlayerGunSync.RPC_MakeDamage), RpcTarget.MasterClient, targetPhotonView.ViewID, gunData._damage); // llamo al rpc del gunsync para dañar a los zombies
             }
-
-            // estos de aca son los locales para evitar el delay del server
-            PlayShootSound();
-            StartCoroutine(MuzzleFlashRoutine());
-
-            // RPCs para que los demas lo reciban y puedan escuchar y ver
-            photonView.RPC("RPC_PlayShootSound", RpcTarget.Others); // others para que lo vean los demas, no yo (local)
-            photonView.RPC("RPC_ShowMuzzleFlash", RpcTarget.Others);
-
         }
+
+        //------------------------------- Feedback Local ------------------------------- //
+        // lo hago local para evitar el delay del server y que desde mi camara se vea y escuche que estoy disparando
+        PlayShootSound();
+        StartCoroutine(MuzzleFlashRoutine());
+
+        //------------------------------- Feedback Servidor ------------------------------- //
+        PhotonView pv = transform.root.GetComponent<PhotonView>(); // vuelvo a buscar el view del jugador para llamar a los rpcs de feedback (flash y gun shoot)
+        pv.RPC(nameof(PlayerGunSync.RPC_PlayShootSound), RpcTarget.Others); // y  solo se los aplico a los otros jugadores 
+        pv.RPC(nameof(PlayerGunSync.RPC_ShowMuzzleFlash), RpcTarget.Others);    // porque ellos tienen que saber que estoy disparando
     }
 
     public void Reload()
@@ -150,19 +137,19 @@ public class Gun : MonoBehaviourPunCallbacks, IGun
         maxAmmo = gunData._maxAmmo;
     }
 
-    IEnumerator MuzzleFlashRoutine()
+    IEnumerator MuzzleFlashRoutine() // corutina para prender y apagar el flash al disparar
     {
         muzzleFlash.SetActive(true);
         yield return new WaitForSeconds(0.05f);   // prendo el flash pasa el tiempo y lo apago 
         muzzleFlash.SetActive(false);
     }
 
-    public void ShowFlash()
+    public void ShowFlash() // llamo a la corutina 
     {
         StartCoroutine(MuzzleFlashRoutine());
     }
 
-    public void PlayShootSound()
+    public void PlayShootSound() // metodo que reproduce el sonido de disparo
     {
         audioSource.PlayOneShot(gunData._shootSound);
     }

@@ -14,7 +14,7 @@ public class PlayerGunSync : MonoBehaviourPun // este script es para que se pued
 
         if (activeGun != null)
         {
-            activeGun.ShowFlash();
+            activeGun.ShowFlash();// si tiene un arma llama a la corrutina del flash
         }
     }
 
@@ -23,7 +23,7 @@ public class PlayerGunSync : MonoBehaviourPun // este script es para que se pued
     {
         var activeGun = gunHolder.GetActiveGun();
 
-        if (activeGun != null)
+        if (activeGun != null) // lo mismo que el muzzle pero reproduce sonido
         {
             activeGun.PlayShootSound();
         }
@@ -35,4 +35,17 @@ public class PlayerGunSync : MonoBehaviourPun // este script es para que se pued
         gunHolder.ChangeGun(id);
     }
 
+    [PunRPC]
+    public void RPC_MakeDamage(int targetViewID, int damage) // busco si el objeto al que le pegue tiene la interfaz IDamageable y llama al metodo GetDamage para dañarlo
+    {
+        PhotonView targetPhotonView = PhotonView.Find(targetViewID);
+
+        Debug.Log($"RPC de hacer daño en: <color=cyan>{targetViewID}</color> con un daño de: <color=yellow>{damage}</color>"); // debug para chequear a que le hace daño y cuanto
+
+        if (targetPhotonView != null && targetPhotonView.TryGetComponent(out IDamageable damageable))
+        {
+            damageable.GetDamage(damage);
+        }
+    }
+    
 }

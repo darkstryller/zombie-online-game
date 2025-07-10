@@ -36,12 +36,9 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     [Header("UI")]
     [SerializeField] private GameObject localHUD;
     [SerializeField] private TMP_Text playerNameText;
-
     #endregion
 
     #region Metodos
-
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -104,7 +101,6 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
             if (Input.GetKeyDown(KeyCode.F))
             {
                 health.TakeDamage(10);
-                Debug.Log(health._currentHealth);
             }
 
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -149,15 +145,15 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
 
     }
 
-    void ChangeGuns()
+    void ChangeGuns() // cambia armas con el rpc para todos en el sv vean y para no tener que tipearlo directo y evitar errores uso el nameof
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            photonView.RPC("RPC_ChangeGun", RpcTarget.All, 0);
+            photonView.RPC(nameof(PlayerGunSync.RPC_ChangeGun), RpcTarget.All, 0);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-           photonView.RPC("RPC_ChangeGun", RpcTarget.All, 1);
+           photonView.RPC(nameof(PlayerGunSync.RPC_ChangeGun), RpcTarget.All, 1);
         }
     }
 
@@ -184,8 +180,8 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
 
     void Look()
     {
-        if (!photonView.IsMine) return; // chequeo x las dudas
-
+        if (!photonView.IsMine) return; 
+                                        // chequeos x las dudas
         if (mainCamera == null) return;
 
         Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
@@ -211,7 +207,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         }
     }
    
-    [PunRPC]
+    [PunRPC] // rpc para setear nombres de jugadores
     public void RPC_SetPlayerName(string playerName)
     {
         playerNameText.text = playerName;

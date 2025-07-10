@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,13 +6,23 @@ public class HealthBarController : MonoBehaviour
     [SerializeField] private Image bar;
     [SerializeField] private HealthScript health;
 
-    void Update()
+    void OnEnable()
     {
-        UpdateBar();
+        if (health != null) // si cambia la vida actualizo la barra
+        {
+            health.OnHealthChanged += Refresh;
+            Refresh(health.CurrentHealth, health.maxHealth);
+        }
     }
 
-    void UpdateBar()
+    void OnDisable()
     {
-        bar.fillAmount = (float)health.GetCurrentHealth() / health.maxHealth; 
+        if (health != null)
+            health.OnHealthChanged -= Refresh;
+    }
+
+    void Refresh(int current, int max)
+    {
+        bar.fillAmount = (float)current / max;
     }
 }

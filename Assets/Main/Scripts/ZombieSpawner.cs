@@ -1,68 +1,87 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
-using UnityEngine;
 using Photon.Pun;
+using UnityEngine;
+using Unity.Mathematics;
+using System.Collections.Generic;
+using TMPro;
 
-public class ZombieSpawner : MonoBehaviour
+public class ZombieSpawner : MonoBehaviourPunCallbacks
 {
     [SerializeField] private Transform[] spawnPoints;
-    [SerializeField] private GameObject zombiePrefab;
-    [SerializeField] private GameObject bossPrefab;
-    [SerializeField] private float maxTime;
-    [SerializeField] private float currentTime;
-    [SerializeField] private int maxWaves;
-    [SerializeField] private int waveCount;
-    private bool canSpawn = true;
+    [SerializeField] private int maxWaves = 5;
 
-    // "sistema de oleadas" super simple 
+    [Header("Configuración de zombis por ronda")]
+    [SerializeField] private int baseZombies = 5;        // Cantidad base en ronda 1
+    [SerializeField] private int zombiesPerRound = 2;    // Cantidad que se suma cada ronda extra
+
+    [SerializeField] private TMP_Text waveText;
+    [SerializeField] private TMP_Text aliveText;
+
+    private int currentWave = 0;
+    private int zombiesAlive;
+
+    private readonly List<int> ids = new();
 
     void Start()
     {
-       // Spawn();
+        if (PhotonNetwork.IsMasterClient) StartNextWave();
     }
 
-    void Update()
+    void StartNextWave()
     {
-        currentTime += Time.deltaTime;
+        currentWave++;
+        if (currentWave > maxWaves) return;
 
-        if (canSpawn)
+        bool bossWave = currentWave % 5 == 0;
+        int amount;
+
+        if (bossWave)
         {
-            if (currentTime >= maxTime)
-            {
-                Spawn();
-                currentTime = 0;
-            }
+            amount = 1;
+        }
+        else
+        {
+            amount = baseZombies + (currentWave - 1) * zombiesPerRound;
         }
 
-        if (waveCount == maxWaves)
+        zombiesAlive = amount;
+
+        for (int i = 0; i < amount; i++)
         {
-            canSpawn = false;
+            string prefab = bossWave ? "boss" : "zombie";
+            Vector3 pos = spawnPoints[i % spawnPoints.Length].position;
+
+            GameObject go = PhotonNetwork.Instantiate(prefab, pos, quaternion.identity);
+            ids.Add(go.GetComponent<PhotonView>().ViewID);
+        }
+
+        photonView.RPC(nameof(RPC_SetWaveUI), RpcTarget.AllBuffered, currentWave, zombiesAlive);
+    }
+
+    public void OnZombieDied(int viewID)
+    {
+        if (!PhotonNetwork.IsMasterClient) return;
+
+        zombiesAlive--;
+        ids.Remove(viewID);
+
+        photonView.RPC(nameof(RPC_SetAliveUI), RpcTarget.All, zombiesAlive);
+
+        if (zombiesAlive <= 0)
+        {
+            StartNextWave();
         }
     }
 
-    void Spawn()
+    [PunRPC]
+    void RPC_SetWaveUI(int wave, int alive)
     {
-        if(PhotonNetwork.IsMasterClient)
-        for (int i = 0; i < spawnPoints.Length; i++)
-        {
-            PhotonNetwork.Instantiate("zombie", spawnPoints[i].position, quaternion.identity);
-            //Instantiate(zombiePrefab, spawnPoints[i].position, quaternion.identity);
-        }
-
-        waveCount++;
-
-        if (waveCount % 5 == 0)
-        {
-            SpawnBoss();
-        }
+        waveText.text = $"Round {wave}";
+        aliveText.text = alive.ToString();
     }
 
-    void SpawnBoss()
+    [PunRPC]
+    void RPC_SetAliveUI(int alive)
     {
-        int randomIndex = UnityEngine.Random.Range(0, spawnPoints.Length);
-        Vector3 bossSpawnPos = spawnPoints[randomIndex].position;
-
-        PhotonNetwork.Instantiate("boss", bossSpawnPos, quaternion.identity);
+        aliveText.text = alive.ToString();
     }
 }
