@@ -109,7 +109,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
             if (Input.GetKeyDown(KeyCode.F))
             {
                 //health.TakeDamage(10);
-                Debug.Log(health._currentHealth);
+                //Debug.Log(health._currentHealth);
             }
 
             if (Input.GetKeyDown(KeyCode.Escape))
