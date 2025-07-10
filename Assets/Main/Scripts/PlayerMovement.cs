@@ -36,16 +36,20 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     [Header("UI")]
     [SerializeField] private GameObject localHUD;
     [SerializeField] private TMP_Text playerNameText;
+    [SerializeField] private TMP_Text mesenger;
+
     #endregion
 
     #region Metodos
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         health = GetComponent<HealthScript>();
         currentEvades = maxEvades;
         mainCamera = Camera.main;
-
+        LobbyMesenger.Usernames.Add(this, playerNameText.text);
         if (photonView.IsMine)
         {
             cameraFollow = mainCamera.GetComponent<CameraWork>();
@@ -74,7 +78,11 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
             localHUD.SetActive(false);
         }
     }
-
+    public override void OnJoinedRoom()
+    {
+        base.OnJoinedRoom();
+        LobbyMesenger.PlayerEnterMessage(playerNameText.text);
+    }
     void Update()
     {
         if (photonView.IsMine)
@@ -100,17 +108,21 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
 
             if (Input.GetKeyDown(KeyCode.F))
             {
-                health.TakeDamage(10);
+                //health.TakeDamage(10);
+                Debug.Log(health._currentHealth);
             }
 
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-         //     PhotonNetwork.Disconnect();
-                Application.Quit();
+                LobbyMesenger.Usernames.Remove(this);
+                LobbyMesenger.PlayerLeftMessage(playerNameText.text);
+                Debug.Log(PhotonNetwork.InRoom + "is on room");
+                RoomLeaver.Instance.LeaveRoom(); 
+
+                //Application.Quit();
             }
         }
     }
-
     void FixedUpdate()
     {
         if (photonView.IsMine)
@@ -125,6 +137,8 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         
     }
 
+
+   
     void Move()
     {
         rb.velocity = dir.normalized * movSpeed;
@@ -145,15 +159,15 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
 
     }
 
-    void ChangeGuns() // cambia armas con el rpc para todos en el sv vean y para no tener que tipearlo directo y evitar errores uso el nameof
+    void ChangeGuns()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            photonView.RPC(nameof(PlayerGunSync.RPC_ChangeGun), RpcTarget.All, 0);
+            gunHolder.ChangeGun(0);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-           photonView.RPC(nameof(PlayerGunSync.RPC_ChangeGun), RpcTarget.All, 1);
+            gunHolder.ChangeGun(1);
         }
     }
 
@@ -180,8 +194,8 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
 
     void Look()
     {
-        if (!photonView.IsMine) return; 
-                                        // chequeos x las dudas
+        if (!photonView.IsMine) return; // chequeo x las dudas
+
         if (mainCamera == null) return;
 
         Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
@@ -207,11 +221,15 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         }
     }
    
-    [PunRPC] // rpc para setear nombres de jugadores
+    [PunRPC]
     public void RPC_SetPlayerName(string playerName)
     {
         playerNameText.text = playerName;
     }
 
+    public void LobbyMesage(string mesage)
+    {
+        mesenger.text = mesage;
+    }
     #endregion
 }
