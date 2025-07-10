@@ -5,19 +5,14 @@ using UnityEngine.UI;
 
 public class MainMenuStarter : MonoBehaviourPunCallbacks
 {
-    public static bool hasRequestedJoinRoom = false; // 🔹 STATIC para que persista al cambiar escenas
+    public static bool hasRequestedJoinRoom = false; // bool para chequear si no estoy queriendo meterme a una escena
 
     [SerializeField] private InputField playerNameInput;
     [SerializeField] private Button connectButton;
 
-    void Awake()
-    {
-        Debug.Log($"[MainMenuStarter] Awake. hasRequestedJoinRoom = {hasRequestedJoinRoom}");
-    }
-
     void Start()
     {
-        PhotonNetwork.IsMessageQueueRunning = true; 
+        PhotonNetwork.IsMessageQueueRunning = true; // lo vuelvo true para evitar problemas
         hasRequestedJoinRoom = false;
 
         PhotonNetwork.NickName = "";
@@ -32,43 +27,40 @@ public class MainMenuStarter : MonoBehaviourPunCallbacks
 
         string playerName = playerNameInput.text.Trim();
 
-        if (string.IsNullOrEmpty(playerName)) // chequeo que no pueda concectarse sin nombre
+        if (string.IsNullOrEmpty(playerName)) // se supone que chequea si tenes nickname, si no tenes no te deberia dejar haacer nada
         {
             Debug.LogWarning("sin nickname no entras.");
             return;
         }
 
 
-        if (!PhotonNetwork.IsConnected)
+        if (!PhotonNetwork.IsConnected) // si no estoy conectado al server pongo el nickname, me conecto y me mete a la room
         {
             ConnectionManager.Instance.SetNickName(playerNameInput.text);
             ConnectionManager.Instance.ConnectToServer(() =>
             {
-                hasRequestedJoinRoom = true;
+                hasRequestedJoinRoom = true; 
                 PhotonNetwork.JoinRandomOrCreateRoom();
             });
         }
         else
         {
-            // Ya conectado, PERO igual seteamos el nombre antes de unirse
             ConnectionManager.Instance.SetNickName(playerNameInput.text);
             hasRequestedJoinRoom = true;
             PhotonNetwork.JoinRandomOrCreateRoom();
         }
     }
 
-    public override void OnJoinedRoom()
+    public override void OnJoinedRoom() // se me a la room si antes no hubo otro intento de "acceso"
     {
-        Debug.Log($"[MainMenuStarter] OnJoinedRoom. Flag = {hasRequestedJoinRoom}");
-
         if (hasRequestedJoinRoom)
         {
-            hasRequestedJoinRoom = false;
+            hasRequestedJoinRoom = false; // lo pongo en falso y cargo la escena
             SceneManager.LoadScene("Lobby");
         }
         else
         {
-            Debug.LogWarning("Se entró a una Room sin haberlo pedido. No hago nada.");
+            Debug.LogWarning("Se entró a una Room sin querer.");
         }
     }
 }
