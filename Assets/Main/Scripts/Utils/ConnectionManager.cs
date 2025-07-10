@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ConnectionManager : MonoBehaviourPunCallbacks // conecta entre el juego y photon
 {
@@ -35,7 +36,7 @@ public class ConnectionManager : MonoBehaviourPunCallbacks // conecta entre el j
     {
         photonManager.Init(HandleJoinedRoom, HandleRoomCreated, HandleNewPlayerInRoom, HandlePlayerLeftRoom);
     }
-    
+
     #region Metodos
     public void SetNickName(string NickName)
     {
@@ -108,6 +109,19 @@ public class ConnectionManager : MonoBehaviourPunCallbacks // conecta entre el j
     {
         return photonManager.GetPlayersInRoom();
     }
+    
+    private bool hasRequestedJoinRoom = false;
+
+    public void SetHasRequestedJoinRoom(bool value)
+    {
+        hasRequestedJoinRoom = value;
+    }
+
+    public bool GetHasRequestedJoinRoom()
+    {
+        return hasRequestedJoinRoom;
+    }
+
     #endregion
 
 }

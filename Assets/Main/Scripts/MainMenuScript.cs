@@ -14,7 +14,6 @@ public class MainMenuScript : MonoBehaviour
         startButton.onClick.AddListener(play);
         quitButton.onClick.AddListener(quit);
     }
-
    
     void play()
     {

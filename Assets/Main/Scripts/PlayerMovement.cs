@@ -8,13 +8,13 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     #region  Variables
     [Header("Movment")]
     [Range(0, 10)]
-    [SerializeField] private float movSpeed = 5f;
+    [SerializeField] private float movSpeed = 6f;
     private float horizontal;
     private float vertical;
     private Vector2 dir;
 
     [Header("Evade")]
-    [Range(5, 10)]
+    [Range(5, 20)]
     [SerializeField] private float evadeForce;
     private bool isEvading = false;
     [SerializeField] private int maxEvades = 2;  // Máximo de cargas de esquive
@@ -105,13 +105,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
             }
 
             ChangeGuns();
-
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                //health.TakeDamage(10);
-                Debug.Log(health._currentHealth);
-            }
-
+           
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 LobbyMesenger.Usernames.Remove(this);

@@ -53,6 +53,7 @@ MonoBehaviour:
   - RPC_SetWaveUI
   - RPC_UpdateHealth
   - RPC_MakeDamage
+  - RPC_Victory
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
