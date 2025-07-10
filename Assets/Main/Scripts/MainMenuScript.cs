@@ -8,7 +8,7 @@ public class MainMenuScript : MonoBehaviour
 {
     [SerializeField] Button startButton;
     [SerializeField] Button quitButton;
-    // Start is called before the first frame update
+    
     void Start()
     {
         startButton.onClick.AddListener(play);
