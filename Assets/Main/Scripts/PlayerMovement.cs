@@ -40,16 +40,12 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     #endregion
 
     #region Metodos
-
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         health = GetComponent<HealthScript>();
         currentEvades = maxEvades;
         mainCamera = Camera.main;
-        
-        LobbyMesenger.Usernames.Add(this, playerNameText.text);
 
         if (photonView.IsMine)
         {
@@ -105,7 +101,6 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
 
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                LobbyMesenger.Usernames.Remove(this);
                 Debug.Log(PhotonNetwork.InRoom + "is on room");
                 RoomLeaver.Instance.LeaveRoom(); 
 
@@ -113,6 +108,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
             }
         }
     }
+    
     void FixedUpdate()
     {
         if (photonView.IsMine)
