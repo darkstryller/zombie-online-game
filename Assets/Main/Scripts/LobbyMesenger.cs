@@ -12,21 +12,21 @@ public static class LobbyMesenger
         Debug.Log("leave message");
         foreach (var item in Usernames)
         {
-            item.Key.LobbyMesage(player + " left the room");
+            MessageDisplay.Instance?.AddMessage($"{player} left the room.");
         }
     }
     public static void PlayerEnterMessage(string player)
     {
         foreach (var item in Usernames)
         {
-            item.Key.LobbyMesage(player + " entered the room");
+            MessageDisplay.Instance?.AddMessage($"{player} Entered the room.");
         }
     }
     public static void PlayerDeadMessage(string player)
     {
         foreach (var item in Usernames)
         {
-            item.Key.LobbyMesage(player + " is dead");
+            MessageDisplay.Instance?.AddMessage($"{player} Died.");
         }
     }
 }
