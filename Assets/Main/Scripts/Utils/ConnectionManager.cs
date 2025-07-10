@@ -74,14 +74,16 @@ public class ConnectionManager : MonoBehaviourPunCallbacks // conecta entre el j
         photonManager.JoinRoom(roomName);
     }
 
-    public void HandleNewPlayerInRoom()
+    public void HandleNewPlayerInRoom(Player player)
     {
         OnPlayerEnterRoom?.Invoke();
+        MessageDisplay.Instance?.AddMessage($"{player.NickName} joined the room.");
     }
 
-    public void HandlePlayerLeftRoom()
+    public void HandlePlayerLeftRoom(Player player)
     {
         OnPlayerLeaveRoom?.Invoke();
+        MessageDisplay.Instance?.AddMessage($"{player.NickName} left the room.");
     }
 
     public void CreateRoom(string roomName)
@@ -109,7 +111,7 @@ public class ConnectionManager : MonoBehaviourPunCallbacks // conecta entre el j
     {
         return photonManager.GetPlayersInRoom();
     }
-    
+
     private bool hasRequestedJoinRoom = false;
 
     public void SetHasRequestedJoinRoom(bool value)
@@ -121,6 +123,7 @@ public class ConnectionManager : MonoBehaviourPunCallbacks // conecta entre el j
     {
         return hasRequestedJoinRoom;
     }
+    
 
     #endregion
 
