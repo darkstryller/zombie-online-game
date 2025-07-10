@@ -37,7 +37,6 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject localHUD;
     [SerializeField] private TMP_Text playerNameText;
     [SerializeField] private TMP_Text mesenger;
-
     #endregion
 
     #region Metodos
@@ -49,7 +48,9 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         health = GetComponent<HealthScript>();
         currentEvades = maxEvades;
         mainCamera = Camera.main;
+        
         LobbyMesenger.Usernames.Add(this, playerNameText.text);
+
         if (photonView.IsMine)
         {
             cameraFollow = mainCamera.GetComponent<CameraWork>();
@@ -78,11 +79,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
             localHUD.SetActive(false);
         }
     }
-    public override void OnJoinedRoom()
-    {
-        base.OnJoinedRoom();
-        LobbyMesenger.PlayerEnterMessage(playerNameText.text);
-    }
+    
     void Update()
     {
         if (photonView.IsMine)
@@ -109,7 +106,6 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 LobbyMesenger.Usernames.Remove(this);
-                LobbyMesenger.PlayerLeftMessage(playerNameText.text);
                 Debug.Log(PhotonNetwork.InRoom + "is on room");
                 RoomLeaver.Instance.LeaveRoom(); 
 
@@ -128,10 +124,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
 
             Move();
         }
-        
     }
-
-
    
     void Move()
     {
