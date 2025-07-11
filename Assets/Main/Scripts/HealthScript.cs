@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Photon.Pun;
 using UnityEngine;
 
@@ -13,9 +14,19 @@ public class HealthScript : MonoBehaviourPun
 
     public event Action<int, int> OnHealthChanged;
 
+    private Renderer _renderer;
+    private Color _originalColor;
+
     void Start()
     {
         currentHealth = maxHealth;
+
+        _renderer = GetComponentInChildren<Renderer>();
+        if (_renderer != null)
+        {
+            _renderer.material = new Material(_renderer.material); // instancia propia
+            _originalColor = _renderer.material.color; // guardar color original
+        }
 
         if (photonView.IsMine) // solo el dueño le manda a todos para actualizar su vida
         {
@@ -30,6 +41,26 @@ public class HealthScript : MonoBehaviourPun
         currentHealth = Mathf.Max(currentHealth - damage, 0); // x si acaso me aseguro que la vida nunca sea negativa (osea no baje de 0)
         photonView.RPC(nameof(RPC_UpdateHealth), RpcTarget.All, currentHealth, maxHealth);
         Debug.Log("took damage");
+
+        StartCoroutine(FlashRed());
+    }
+
+    private void RPC_FlashRed()
+    {
+        if (_renderer != null)
+        {
+            StopCoroutine(nameof(FlashRed)); // evitar superposición si recibe daño muy rápido
+            StartCoroutine(FlashRed());
+        }
+    }
+
+    private IEnumerator FlashRed()
+    {
+        _renderer.material.color = Color.red;
+
+        yield return new WaitForSeconds(0.2f);
+
+        _renderer.material.color = _originalColor;
     }
 
     public void ResetHealth() // metodo x si quiero reiniciar la vida
