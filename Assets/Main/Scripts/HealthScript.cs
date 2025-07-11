@@ -33,12 +33,12 @@ public class HealthScript : MonoBehaviourPun
             photonView.RPC(nameof(RPC_UpdateHealth), RpcTarget.All, currentHealth, maxHealth);
         }
     }
-   
+
     public void TakeDamage(int damage)
     {
         if (!photonView.IsMine) return;  // si no esta sincronizado corta aca
 
-        currentHealth = Mathf.Max(currentHealth - damage, 0); // x si acaso me aseguro que la vida nunca sea negativa (osea no baje de 0)
+        currentHealth -= damage; // x si acaso me aseguro que la vida nunca sea negativa (osea no baje de 0)
         photonView.RPC(nameof(RPC_UpdateHealth), RpcTarget.All, currentHealth, maxHealth);
         Debug.Log("took damage");
 
@@ -82,5 +82,17 @@ public class HealthScript : MonoBehaviourPun
         currentHealth = newCurrent;
         maxHealth = newMax;
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
+    }
+
+    [PunRPC]
+    public void RPC_TakeDamage(int dmg)
+    {
+        if (currentHealth <= 0) return;
+
+        currentHealth -= dmg;
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
+
+        if (currentHealth <= 0) { Destroy(this); }
+
     }
 }

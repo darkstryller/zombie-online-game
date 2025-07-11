@@ -49,7 +49,7 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: 7d1bbd6f42f7d2d44a2e94569c8ee526, type: 2}
   targetlayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
 --- !u!58 &2464494861505705611
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -62,7 +62,7 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0

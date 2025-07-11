@@ -11,9 +11,9 @@ public class MessageDisplay : MonoBehaviour
     [SerializeField] private float messageLifetime = 5f; // Tiempo que dura cada mensaje
     [SerializeField] private int maxMessages = 5;
 
-    private List<MessageEntry> messages = new List<MessageEntry>();
+    private List<MessageEntry> messages = new List<MessageEntry>(); // lista de clase mensajes
 
-    private class MessageEntry
+    private class MessageEntry // me guardo la duracion del texto y lo que dice en esta clase
     {
         public string text;
         public float timeRemaining;

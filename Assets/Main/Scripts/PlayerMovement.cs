@@ -3,7 +3,7 @@ using UnityEngine;
 using Photon.Pun;
 using TMPro;
 
-public class PlayerMovement : MonoBehaviourPunCallbacks
+public class PlayerMovement : MonoBehaviourPunCallbacks, IDamageable
 {
     #region  Variables
     [Header("Movment")]
@@ -108,7 +108,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
             }
         }
     }
-    
+
     void FixedUpdate()
     {
         if (photonView.IsMine)
@@ -213,6 +213,11 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     public void LobbyMesage(string mesage)
     {
         mesenger.text = mesage;
+    }
+
+    public void GetDamage(int damage)
+    {
+        health.TakeDamage(damage);
     }
     #endregion
 }

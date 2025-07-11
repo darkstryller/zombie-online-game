@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-public class MessageBroadcaster : MonoBehaviourPun
+
+public class MessageBroadcaster : MonoBehaviourPun // se encarga de conectar el messagedisplay con el photon view para poder llamar al rpc
 {
     public static MessageBroadcaster Instance;
 

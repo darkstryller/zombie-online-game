@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Base Zombi
   m_EditorClassIdentifier: 
   <_health>k__BackingField: 25
-  <_damage>k__BackingField: 5
+  <_damage>k__BackingField: 10
   <_range>k__BackingField: 5
   <_speed>k__BackingField: 5
   <_attackLayer>k__BackingField:
