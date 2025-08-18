@@ -16,7 +16,7 @@ public class Lobby : MonoBehaviourPunCallbacks
     void Start()
     {
         createRoomButton.onClick.AddListener(OnCreateRoomButtonClicked);
-        manager = FindAnyObjectByType<GameManager>();
+        manager = FindObjectOfType<GameManager>();
         EmptyTexts();
 
         ConnectionManager.Instance.OnJoinRoom += UpdatePlayers;
